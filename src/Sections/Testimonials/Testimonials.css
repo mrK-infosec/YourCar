@@ -1,0 +1,70 @@
+.Testimonials {
+  background-color: #12273d;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: stretch;
+  justify-content: center;
+  gap: 10rem;
+}
+.inside-box {
+  display: flex;
+  justify-content: space-evenly;
+  height: 42.4rem;
+  width: 84.6rem;
+  background-color: #ffffff;
+  font-family: Lato;
+  font-size: 2.4rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 3.6rem;
+  letter-spacing: 0em;
+  text-align: center;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+
+.inside-box p {
+  max-width: 60.4rem;
+}
+
+.group-star {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.comment-user {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 7rem;
+}
+
+.comment-user h5 {
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 3.2rem;
+  line-height: 150%;
+  color: #12273D;
+}
+
+.comment-user h6 {
+  font-family: 'Nunito Sans';
+font-style: italic;
+font-weight: 300;
+font-size: 2.4rem;
+line-height: 150%;
+/* or 36px */
+color: #979797;
+}
+
+.bmwcar {
+  position: relative;
+  bottom: 21rem;
+  left: 39rem;
+}

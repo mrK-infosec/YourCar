@@ -1,0 +1,19 @@
+.main-sec-heading {
+  padding-bottom: 3rem;
+}
+
+.main-sec-heading h2 {
+  color: #ebebeb;
+  font-size: 12rem;
+  position: absolute;
+  line-height: 0rem;
+  z-index: 2;
+}
+.main-sec-heading h3 {
+  /* color: #741906; */
+  font-size: 6rem;
+  position: relative;
+  /* top: 13px;
+  left: 12px;    TODO: */  
+  z-index: 3;
+}
