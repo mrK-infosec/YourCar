@@ -1,0 +1,28 @@
+.hero {
+  background: url(./../../assets/images/Sections-Images/Hero/Hero-Background.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 990px;
+  padding-top: 10rem;
+  display: flex;
+  justify-content: space-between;
+  direction: rtl;
+}
+.hero-desc {
+  width: 45%;
+}
+.first-heading {
+  padding-top: 5rem;
+  color: white;
+  justify-content: flex-start;
+  font-size: 6rem;
+}
+.hero-desc p {
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+  font-size: 3.0rem;
+  font-weight: bold;
+  color: white;
+  width: 66%;
+  /* direction: ltr; */
+}

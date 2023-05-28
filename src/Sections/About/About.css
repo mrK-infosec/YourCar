@@ -1,0 +1,28 @@
+.about {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+.about-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  /* justify-content: space-between; */
+}
+
+.about-desc p {
+  font-size: 2rem;
+  width: 82%;
+  line-height: 3.2rem;
+}
+
+.carAsset {
+  z-index: 4;
+  position: relative;
+  left: 7rem;
+}
+.carAssetBG {
+  z-index: 3;
+  position: absolute;
+}

@@ -1,0 +1,33 @@
+.sp-btns {
+  /* position: relative;
+  top: 2rem;
+  left: 10rem;
+  display: flex;
+  border-radius: 4px;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center; */
+}
+
+.sp-btns span {
+  padding: 0.2rem 1.4rem;
+  font-size: 3rem;
+}
+
+.sp-btns .addbtn,
+.sp-btns .minusbtn {
+  width: 30px;
+  height: 30px;
+  background-color: #741906;
+  color: #bebec5;
+  border: 1px solid;
+  font-size: 2.4rem;
+  line-height: 30px;
+}
+.sp-btns .addbtn {
+  border-radius: 0 5px 5px 0;
+}
+
+.sp-btns .minusbtn {
+  border-radius: 5px 0 0 5px;
+}

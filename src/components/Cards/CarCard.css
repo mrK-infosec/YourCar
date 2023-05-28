@@ -1,0 +1,64 @@
+.card-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 8rem;
+}
+
+.car-card {
+  border: 0px solid #bebec5;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  width: 37.8rem;
+  height: 59rem;
+  margin-bottom: 4rem;
+  box-shadow: 0px 0rem 4.8rem rgba(0, 0, 0, 0.075);
+  border-radius: 11px;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  gap: 3rem;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.brand-title {
+  text-align: center;
+}
+.car-card h4 {
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 3.3rem;
+  color: #741906;
+  padding-top: 2rem;
+}
+.sec h4 {
+  padding-top: 0;
+}
+.car-card h5 {
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  color: rgba(35, 34, 34, 0.96);
+}
+.car-card p {
+  font-family: "Nunito Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 150%;
+  color: rgba(35, 34, 34, 0.96);
+}
+
+.section-bot {
+  /* FIXME:  AND FIX MY BROTHERS DON'T USE POSITION*/
+  display: flex;
+  height: max-content;
+  align-items: center;
+}

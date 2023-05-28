@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth; /*Don't work in safari */
+}
+
+:root {
+  font-size: 10px;
+  --font-family-primary: "Nunito", san-serif;
+  --font-family-secondary: "Lora", san-serif;
+}
+
+/* 
+Font-size 
+default edit it to 10px perviously 16px
+*/
+
+.container {
+  max-width: 140rem;
+  padding-left: 8rem;
+  padding-right: 8rem;
+  font-family: var(--font-family-secondary);
+}
+
+.btn {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  font-size: 4.9rem;
+}
+
+h2 {
+  font-size: 4.9rem;
+}
+
+section {
+  padding-top: 10rem;
+}
+
+p {
+  margin: 1rem 0;
+}
+
+ul {
+  list-style: none;
+}
+
+ul li {
+  padding: 0.5rem 0;
+}
