@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.77232c9a.css",
+    "main.js": "/static/js/main.e4492806.js",
+    "static/media/Hero-Background.png": "/static/media/Hero-Background.f64d4a15bf6c64700597.png",
+    "static/media/Car-Assets-BG.png": "/static/media/Car-Assets-BG.21df5ade187af0ffed00.png",
+    "static/media/Car-1.png": "/static/media/Car-1.d6c9981f27eeb6ed1723.png",
+    "static/media/Car-Assets.png": "/static/media/Car-Assets.95dff92f8fb75368632e.png",
+    "static/media/Car-6.png": "/static/media/Car-6.cc3090da4f3c7647d2c4.png",
+    "static/media/Car.png": "/static/media/Car.2771a9521a45a6ff668e.png",
+    "static/media/Car-3.png": "/static/media/Car-3.73d39197e7c9b79e7fd6.png",
+    "static/media/CTA BG.png": "/static/media/CTA BG.686cd3b4e687996108ba.png",
+    "static/media/Car-4.png": "/static/media/Car-4.bdae3591b574cd65c045.png",
+    "static/media/Car-5.png": "/static/media/Car-5.73ffd826a065984ee363.png",
+    "static/media/Rectangle 2.png": "/static/media/Rectangle 2.2668c6cdfcd00e17e67a.png",
+    "static/media/Car-7.png": "/static/media/Car-7.ebbc5c1a63c3cfcdf603.png",
+    "static/media/Car-2.png": "/static/media/Car-2.2ece6aa936d576aeb2be.png",
+    "static/media/image 3.png": "/static/media/image 3.b52146d1f6cbf1909db6.png",
+    "static/media/car4.png": "/static/media/car4.67ba99610ec0250e24c9.png",
+    "static/media/image 3-2.png": "/static/media/image 3-2.a0c4c15cce711fd8b842.png",
+    "static/media/image 3-1.png": "/static/media/image 3-1.3ac0a1508827f86a1446.png",
+    "static/media/subaru.png": "/static/media/subaru.eb2c410c614821706bcd.png",
+    "index.html": "/index.html",
+    "static/media/chevron-right-1.svg": "/static/media/chevron-right-1.27519409e031c43e8cd4aa2f1be2c8ba.svg",
+    "static/media/chevron-right.svg": "/static/media/chevron-right.b61bf4d5a50a6c71badfac52db280ecf.svg",
+    "main.77232c9a.css.map": "/static/css/main.77232c9a.css.map",
+    "main.e4492806.js.map": "/static/js/main.e4492806.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.77232c9a.css",
+    "static/js/main.e4492806.js"
+  ]
+}
