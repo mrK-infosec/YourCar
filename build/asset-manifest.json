@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.77232c9a.css",
-    "main.js": "/static/js/main.e4492806.js",
+    "main.js": "/static/js/main.f121657d.js",
     "static/media/Hero-Background.png": "/static/media/Hero-Background.f64d4a15bf6c64700597.png",
     "static/media/Car-Assets-BG.png": "/static/media/Car-Assets-BG.21df5ade187af0ffed00.png",
     "static/media/Car-1.png": "/static/media/Car-1.d6c9981f27eeb6ed1723.png",
@@ -24,10 +24,10 @@
     "static/media/chevron-right-1.svg": "/static/media/chevron-right-1.27519409e031c43e8cd4aa2f1be2c8ba.svg",
     "static/media/chevron-right.svg": "/static/media/chevron-right.b61bf4d5a50a6c71badfac52db280ecf.svg",
     "main.77232c9a.css.map": "/static/css/main.77232c9a.css.map",
-    "main.e4492806.js.map": "/static/js/main.e4492806.js.map"
+    "main.f121657d.js.map": "/static/js/main.f121657d.js.map"
   },
   "entrypoints": [
     "static/css/main.77232c9a.css",
-    "static/js/main.e4492806.js"
+    "static/js/main.f121657d.js"
   ]
 }
