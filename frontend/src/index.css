@@ -1,0 +1,85 @@
+/* Import standard Tailwind CSS layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Base layer to set our custom premium typography and page scrollbars */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+  }
+  
+  /* Sleek custom scrollbars to maintain premium theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #0B0C10;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #1F2833;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #45A29E;
+  }
+}
+
+/* Custom premium CSS utility classes */
+@layer components {
+  /* Frosted Glassmorphism Dark Container */
+  .glass-card {
+    background: rgba(31, 40, 51, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  /* Frosted Glassmorphism Dark Container with Cyan hover glows */
+  .glass-card-interactive {
+    @apply glass-card transition-all duration-300 ease-out;
+  }
+  
+  .glass-card-interactive:hover {
+    background: rgba(31, 40, 51, 0.65);
+    border-color: rgba(102, 252, 241, 0.25);
+    box-shadow: 0 12px 40px 0 rgba(102, 252, 241, 0.08);
+    transform: translateY(-4px);
+  }
+
+  /* Glassmorphism Sidebar */
+  .glass-sidebar {
+    background: rgba(11, 12, 16, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Luxury gold outline button */
+  .btn-gold {
+    @apply border border-brand-gold text-brand-gold bg-transparent font-medium py-2.5 px-6 rounded-md hover:bg-brand-gold hover:text-black transition-all duration-300 active:scale-95;
+  }
+
+  /* Luxury Teal/Cyan action button */
+  .btn-teal {
+    @apply bg-brand-teal text-black font-semibold py-2.5 px-6 rounded-md hover:bg-opacity-85 hover:shadow-[0_0_15px_rgba(102,252,241,0.4)] transition-all duration-300 active:scale-95;
+  }
+
+  /* Input fields focusing effects */
+  .form-input {
+    @apply bg-black bg-opacity-40 border border-brand-charcoal text-white rounded-md py-2.5 px-4 outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition-all duration-300 placeholder:text-gray-600;
+  }
+}
