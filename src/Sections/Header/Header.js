@@ -13,6 +13,7 @@ function Header() {
   const [email, setEmail] = useState("");
   const [rentalDays, setRentalDays] = useState(1);
   const [reservationId, setReservationId] = useState("");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const {
     cartItems,
@@ -25,6 +26,14 @@ function Header() {
   function addActiveClass() {
     setClassInBtn(`${classInBtn.includes("active") ? "" : "active"}`);
   }
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   const handleCheckoutSubmit = async (e) => {
     e.preventDefault();
@@ -78,25 +87,36 @@ function Header() {
           Your<span>Car</span>
         </h1>
         <div className="main-nav">
-          <ul className="nav-child">
+          <ul className={`nav-child ${isMobileMenuOpen ? "active" : ""}`}>
             <li>
-              <a href="#hero" className="active">
+              <a href="#hero" className="active" onClick={closeMobileMenu}>
                 Home
               </a>
             </li>
             <li>
-              <a href="#about">About</a>
+              <a href="#about" onClick={closeMobileMenu}>About</a>
             </li>
             <li>
-              <a href="#service">Service</a>
+              <a href="#service" onClick={closeMobileMenu}>Service</a>
             </li>
             <li>
-              <a href="#cars">Cars</a>
+              <a href="#cars" onClick={closeMobileMenu}>Cars</a>
             </li>
             <li>
-              <a href="#contact">Contact us</a>
+              <a href="#contact" onClick={closeMobileMenu}>Contact us</a>
             </li>
           </ul>
+
+          <button 
+            className={`hamburger-menu ${isMobileMenuOpen ? "active" : ""}`}
+            onClick={toggleMobileMenu}
+            aria-label="Toggle Mobile Menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
           <div
             className={`shopping  ${classInBtn}`}
             onClick={addActiveClass}
@@ -104,7 +124,14 @@ function Header() {
             <img className="shopping-cart" src={cart} alt="cart" />
             <span className="sty quantity">{cartQuantity}</span>
           </div>
-          <div className="side-list">
+          
+          <div className={`drawer-overlay ${classInBtn}`} onClick={() => setClassInBtn("")}></div>
+
+          <div className={`side-list ${classInBtn}`}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginBottom: '20px', color: 'white' }}>
+               <h2 style={{ fontSize: '2.2rem', margin: 0, fontFamily: 'var(--font-family-secondary)' }}>Shopping Cart</h2>
+               <button onClick={() => setClassInBtn("")} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.6)', fontSize: '3rem', cursor: 'pointer', lineHeight: 1 }}>×</button>
+            </div>
             <div className="side-list-scrollable">
               {cartItems.length === 0 ? (
                 <div className="empty-cart-message">

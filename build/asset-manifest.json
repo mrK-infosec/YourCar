@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.3c993082.css",
-    "main.js": "/static/js/main.84bad1c4.js",
+    "main.css": "/static/css/main.b073c4d9.css",
+    "main.js": "/static/js/main.95f867da.js",
     "static/media/Hero-Background.png": "/static/media/Hero-Background.f64d4a15bf6c64700597.png",
     "static/media/Car-Assets-BG.png": "/static/media/Car-Assets-BG.21df5ade187af0ffed00.png",
     "static/media/Car-1.png": "/static/media/Car-1.d6c9981f27eeb6ed1723.png",
@@ -23,11 +23,11 @@
     "index.html": "/index.html",
     "static/media/chevron-right-1.svg": "/static/media/chevron-right-1.2c568a7fb39a547e52b7446e7148ab58.svg",
     "static/media/chevron-right.svg": "/static/media/chevron-right.09fadbb8bc01cbd9d4ca2e70241695ee.svg",
-    "main.3c993082.css.map": "/static/css/main.3c993082.css.map",
-    "main.84bad1c4.js.map": "/static/js/main.84bad1c4.js.map"
+    "main.b073c4d9.css.map": "/static/css/main.b073c4d9.css.map",
+    "main.95f867da.js.map": "/static/js/main.95f867da.js.map"
   },
   "entrypoints": [
-    "static/css/main.3c993082.css",
-    "static/js/main.84bad1c4.js"
+    "static/css/main.b073c4d9.css",
+    "static/js/main.95f867da.js"
   ]
 }

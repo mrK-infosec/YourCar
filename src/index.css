@@ -1,0 +1,31 @@
+/* ==========================================================================
+   GLOBAL LAYOUT SYSTEM
+   ========================================================================== */
+
+/* 
+   Prevent horizontal scrollbar and blank white spaces on the side.
+   This locks the horizontal viewport and keeps off-screen translated elements 
+   (like the absolute cart drawer) completely hidden until toggled.
+*/
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Base styles and box-sizing resets */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

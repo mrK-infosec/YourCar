@@ -20,15 +20,23 @@ const Sbtn = ({ product }) => {
   }
 
   return (
-    <div className="sp-btns">
-      <button className="minusbtn" onClick={countDown}>
-        -
-      </button>
-      <span>{quantity}</span>
-      <button className="addbtn" onClick={countUp}>
-        +
-      </button>
-    </div>
+    <>
+      {quantity === 0 ? (
+        <button className="btn-primary" onClick={countUp} style={{ padding: '10px 20px', border: 'none', borderRadius: '5px', backgroundColor: '#741906', color: 'white', fontWeight: 'bold', cursor: 'pointer' }}>
+          Rent Now
+        </button>
+      ) : (
+        <div className="sp-btns">
+          <button className="minusbtn" onClick={countDown}>
+            -
+          </button>
+          <span>{quantity}</span>
+          <button className="addbtn" onClick={countUp}>
+            +
+          </button>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -47,7 +47,14 @@ header {
   background-color: #741906;
 }
 
-.main-nav img {
+.shopping {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.shopping img {
   height: 30px;
   margin-left: 2rem;
 }
@@ -60,13 +67,18 @@ header {
   align-items: center;
   color: #fff;
   position: absolute;
-  top: 2rem;
-  left: 90%;
-  padding: 0.5rem 1rem;
+  top: -8px;
+  right: -8px;
+  min-width: 1.8rem;
+  height: 1.8rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.2rem;
+  pointer-events: none;
 }
 
 .side-list {
-  position: absolute;
+  position: fixed;
   width: 38rem;
   height: calc(100vh - 10rem);
   background: #12273dcb;
@@ -77,24 +89,37 @@ header {
   transform: translate(100%);
   transition: 0.5s;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.shopping.active + .side-list {
+.side-list.active {
   transform: translate(0);
 }
 
-.side-list {
-  display: flex;
-  align-items: center;
-  /* flex-direction: column; */
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 19220; /* Just below side-list (19221) */
+  display: none;
+}
+
+.drawer-overlay.active {
+  display: block;
 }
 
 .side-list .card-list {
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding: 0;
+  margin: 0;
 }
 
 .card-list .cartCard {
@@ -496,11 +521,93 @@ header {
   background: #219653;
 }
 
-/* Mobile Responsiveness for Header Drawer */
-@media (max-width: 480px) {
+/* ==========================================
+   MOBILE HAMBURGER LAYOUT
+   ========================================== */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  margin-left: 2rem;
+  padding: 0;
+}
+
+.hamburger-menu span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hamburger-menu.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN RULES
+   ========================================== */
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: flex;
+  }
+
+  .main-nav .nav-child {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0f1d2c;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    transform: translateY(-100%);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .main-nav .nav-child.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .main-nav .nav-child a {
+    font-size: 2.4rem;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
   .side-list {
     width: 100%;
+    top: 10rem;
+    height: calc(100vh - 10rem);
   }
+}
+
+@media (max-width: 480px) {
   .checkout-modal {
     padding: 2rem;
   }
