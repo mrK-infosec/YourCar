@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.77232c9a.css",
-    "main.js": "/static/js/main.f121657d.js",
+    "main.css": "/static/css/main.3c993082.css",
+    "main.js": "/static/js/main.84bad1c4.js",
     "static/media/Hero-Background.png": "/static/media/Hero-Background.f64d4a15bf6c64700597.png",
     "static/media/Car-Assets-BG.png": "/static/media/Car-Assets-BG.21df5ade187af0ffed00.png",
     "static/media/Car-1.png": "/static/media/Car-1.d6c9981f27eeb6ed1723.png",
@@ -21,13 +21,13 @@
     "static/media/image 3-1.png": "/static/media/image 3-1.3ac0a1508827f86a1446.png",
     "static/media/subaru.png": "/static/media/subaru.eb2c410c614821706bcd.png",
     "index.html": "/index.html",
-    "static/media/chevron-right-1.svg": "/static/media/chevron-right-1.27519409e031c43e8cd4aa2f1be2c8ba.svg",
-    "static/media/chevron-right.svg": "/static/media/chevron-right.b61bf4d5a50a6c71badfac52db280ecf.svg",
-    "main.77232c9a.css.map": "/static/css/main.77232c9a.css.map",
-    "main.f121657d.js.map": "/static/js/main.f121657d.js.map"
+    "static/media/chevron-right-1.svg": "/static/media/chevron-right-1.2c568a7fb39a547e52b7446e7148ab58.svg",
+    "static/media/chevron-right.svg": "/static/media/chevron-right.09fadbb8bc01cbd9d4ca2e70241695ee.svg",
+    "main.3c993082.css.map": "/static/css/main.3c993082.css.map",
+    "main.84bad1c4.js.map": "/static/js/main.84bad1c4.js.map"
   },
   "entrypoints": [
-    "static/css/main.77232c9a.css",
-    "static/js/main.f121657d.js"
+    "static/css/main.3c993082.css",
+    "static/js/main.84bad1c4.js"
   ]
 }

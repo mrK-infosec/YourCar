@@ -1,8 +1,14 @@
 import ReactDOM from 'react-dom/client'; // The way to use ReactDom
 import './index.css';
 import App from './App'; // to import app.js component
+import { ShoppingCartProvider } from './components/ShoppingCart/ShoppingCart';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(<App />);
+root.render(
+  <ShoppingCartProvider>
+    <App />
+  </ShoppingCartProvider>
+);
+
 

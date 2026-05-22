@@ -1,11 +1,83 @@
-import { Children, createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const ShoppingCartContext = createContext({});
 
-const ShoppingCartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+export const ShoppingCartProvider = ({ children }) => {
+  const [cartItems, setCartItems] = useState(() => {
+    try {
+      const localData = localStorage.getItem("yourcar_cart");
+      return localData ? JSON.parse(localData) : [];
+    } catch (e) {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem("yourcar_cart", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  const addToCart = (product) => {
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((item) => item.id === product.id);
+      if (existingItem) {
+        return prevItems.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prevItems, { ...product, quantity: 1 }];
+    });
+  };
+
+  const removeFromCart = (id) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
+  const updateQuantity = (id, quantity) => {
+    if (quantity <= 0) {
+      removeFromCart(id);
+      return;
+    }
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, quantity } : item
+      )
+    );
+  };
+
+  const getItemQuantity = (id) => {
+    const item = cartItems.find((item) => item.id === id);
+    return item ? item.quantity : 0;
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
+  const cartQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
+  const cartTotal = cartItems.reduce(
+    (total, item) => total + item.quantity * item.price,
+    0
+  );
+
   return (
-    <ShoppingCartContext.Provider value={{ cartItems }}>
+    <ShoppingCartContext.Provider
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        getItemQuantity,
+        clearCart,
+        cartQuantity,
+        cartTotal,
+      }}
+    >
       {children}
     </ShoppingCartContext.Provider>
   );
@@ -15,34 +87,4 @@ export default ShoppingCartProvider;
 
 export const useShoppingCart = () => {
   return useContext(ShoppingCartContext);
-};
-
-// let openShopping = document.querySelector(".shopping");
-// let list = document.querySelector(".side-list");
-// let  cardList = document.querySelector('.card-list')
-// let body = document.querySelector('body');
-// let quantity = document.querySelector('.quantity');
-
-// // openShopping.addEventListener('click', ()=> {body.classList.add('active')});
-
-
-
-let products = [
-  {
-    id: 1,
-    name: 'Mercedes maybach s600',
-    image: "../../assets/images/image 3.png",
-  },
-
-  {
-    id:2,
-    name:"Mercedes G - wagon",
-    image: "../../assets/images/image 3-1.png",
-  },
-
-  {
-    id:3,
-    name:"Mercedes M class",
-    image: "../../assets/images/image 3-2.png",
-  }
-];
+};

@@ -27,6 +27,8 @@ const Cars = () => {
       <div className="card-container">
         <img className="vector" src={vector} alt="sd" />
         <CarCard
+          id={1}
+          price={500}
           carImage={car1}
           mainTitle="FIRST CLASS"
           subTitle="Mercedes maybach s600"
@@ -38,6 +40,8 @@ const Cars = () => {
           luggage="2"
         />
         <CarCard
+          id={2}
+          price={400}
           carImage={car2}
           mainTitle="BUSINESS CLASS"
           subTitle="Mercedes G - wagon"
@@ -49,6 +53,8 @@ const Cars = () => {
           luggage="2"
         />
         <CarCard
+          id={3}
+          price={250}
           carImage={car3}
           mainTitle="SUV"
           subTitle="Mercedes M class"

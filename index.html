@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourCar | Premium Cars</title>
+    <!-- Use Inter font from Google Fonts for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ==============================
+           CSS STYLING & DESIGN
+           ============================== */
+        
+        /* CSS Variables for easy color changes */
+        :root {
+            --primary-color: #2563eb; /* Blue */
+            --primary-hover: #1d4ed8;
+            --bg-light: #f8fafc;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --border-radius: 12px;
+        }
+
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        /* Navbar */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-btn {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .cart-count {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            padding: 2px 8px;
+            font-size: 0.8rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1920&q=80') center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            color: #e2e8f0;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Success Message Container */
+        #successMessage {
+            display: none;
+            background-color: #10b981;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+        }
+
+        /* About & Services Sections */
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            margin: 15px 0;
+        }
+
+        /* Cars Grid */
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .car-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .car-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .car-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .car-category {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .car-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .car-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .car-features {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .car-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            margin-top: auto;
+        }
+
+        .car-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* Cart Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 500px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .cart-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .qty-btn {
+            background-color: var(--border-color);
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #ef4444; /* Red */
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .modal-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-light);
+            border-bottom-left-radius: var(--border-radius);
+            border-bottom-right-radius: var(--border-radius);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        /* Checkout Form inside Modal */
+        .checkout-form {
+            display: none; /* Hidden until user clicks checkout */
+            margin-top: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 40px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Hide standard links on very small mobile for simplicity */
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">YourCar.</a>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#cars">Cars</a>
+            </nav>
+            <button class="cart-btn" onclick="openCart()">
+                🛒 Cart <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- SUCCESS MESSAGE -->
+    <div id="successMessage"></div>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Find Your Dream Car Today</h1>
+            <p>Experience the thrill of the road with our premium selection of vehicles for sale and rent. Quality, comfort, and performance guaranteed.</p>
+            <a href="#cars" class="btn-primary">Browse Cars</a>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section-padding" style="background-color: white;">
+        <div class="container" style="text-align: center; max-width: 800px;">
+            <h2 class="section-title">About YourCar</h2>
+            <p class="section-subtitle">We are dedicated to providing the best automotive experience.</p>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">
+                At YourCar, we believe that driving should be an experience, not just a commute. 
+                Whether you are looking to buy a luxurious sedan, rent an SUV for a weekend getaway, 
+                or sell your current vehicle, our expert team is here to help. We curate a selection 
+                of the finest vehicles to ensure you hit the road in style and safety.
+            </p>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Everything you need under one roof.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3 style="font-size: 1.5rem;">🚘 Car Sales</h3>
+                    <p style="color: var(--text-muted);">Explore our wide inventory of brand new and certified pre-owned vehicles. Flexible financing available.</p>
+                </div>
+                <div class="service-card">
+                    <h3 style="font-size: 1.5rem;">🔑 Car Rental</h3>
+                    <p style="color: var(--text-muted);">Need a car for a few days? Choose from our diverse fleet of well-maintained rental cars.</p>
+                </div>
+                <div class="service-card">
+                    <h3 style="font-size: 1.5rem;">🤝 Car Selling</h3>
+                    <p style="color: var(--text-muted);">Get the best market value for your car. Quick, hassle-free appraisal and instant payment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARS LISTING SECTION -->
+    <section id="cars" class="section-padding" style="background-color: white;">
+        <div class="container">
+            <h2 class="section-title">Available Vehicles</h2>
+            <p class="section-subtitle">Select a vehicle to add to your cart.</p>
+            <!-- This container will be filled by JavaScript -->
+            <div class="cars-grid" id="carsContainer">
+                <!-- Car cards will go here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <h2>YourCar.</h2>
+            <p style="color: var(--text-muted); margin-top: 10px;">© 2024 YourCar Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- CART & CHECKOUT MODAL -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Your Shopping Cart</h2>
+                <button class="modal-close" onclick="closeCart()">×</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Cart items list -->
+                <div id="cartItemsList">
+                    <p>Your cart is empty.</p>
+                </div>
+
+                <!-- Checkout Form -->
+                <form class="checkout-form" id="checkoutForm" onsubmit="handleCheckout(event)">
+                    <h3 style="margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Checkout Details</h3>
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" id="custName" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number *</label>
+                        <input type="tel" id="custPhone" required placeholder="+1 234 567 890">
+                    </div>
+                    <div class="form-group">
+                        <label>Email (Optional)</label>
+                        <input type="email" id="custEmail" placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Address *</label>
+                        <input type="text" id="custAddress" required placeholder="123 Main St, City, Country">
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;">Complete Order</button>
+                    <button type="button" class="btn-primary" style="width: 100%; background: #94a3b8; margin-top: 10px;" onclick="cancelCheckout()">Back to Cart</button>
+                </form>
+            </div>
+            
+            <div class="modal-footer" id="modalFooter">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cartTotalDisplay">$0</span>
+                </div>
+                <button class="btn-primary" style="width: 100%;" id="checkoutBtn" onclick="showCheckoutForm()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // ==========================================
+        // ========== HOW TO EDIT CARS ==========
+        // ==========================================
+        // To change cars, edit the "carsData" list below. 
+        // You can change the price, name, images, seats, etc., by modifying the values inside the quotes or numbers.
+        // Make sure to follow the exact same format (keep the brackets and commas).
+        // ==========================================
+
+        const carsData = [
+            {
+                id: 1,
+                name: "Mercedes-Benz S-Class",
+                price: 110000,
+                imageUrl: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=600&q=80",
+                description: "The ultimate luxury sedan with advanced tech and comfort.",
+                seats: 5,
+                luggage: 3,
+                category: "First Class"
+            },
+            {
+                id: 2,
+                name: "BMW M8 Competition",
+                price: 130000,
+                imageUrl: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=600&q=80",
+                description: "Unmatched performance combined with aggressive styling.",
+                seats: 4,
+                luggage: 2,
+                category: "Sports"
+            },
+            {
+                id: 3,
+                name: "Audi Q8",
+                price: 75000,
+                imageUrl: "https://images.unsplash.com/photo-1503376712341-ea1c320d5ccb?auto=format&fit=crop&w=600&q=80",
+                description: "A sporty SUV that delivers power and spaciousness.",
+                seats: 5,
+                luggage: 4,
+                category: "SUV"
+            },
+            {
+                id: 4,
+                name: "Porsche 911 Carrera",
+                price: 114000,
+                imageUrl: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80",
+                description: "The iconic sports car for driving enthusiasts.",
+                seats: 2,
+                luggage: 1,
+                category: "Business Class"
+            },
+            {
+                id: 5,
+                name: "Lexus LC 500",
+                price: 94000,
+                imageUrl: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=600&q=80",
+                description: "A stunning grand tourer with a roaring V8 engine.",
+                seats: 4,
+                luggage: 2,
+                category: "First Class"
+            },
+            {
+                id: 6,
+                name: "Range Rover Vogue",
+                price: 105000,
+                imageUrl: "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=600&q=80",
+                description: "Premium luxury SUV perfect for family and off-road.",
+                seats: 5,
+                luggage: 5,
+                category: "SUV"
+            }
+        ];
+
+
+        // ==========================================
+        // ========== APPLICATION LOGIC ==========
+        // ==========================================
+
+        // 1. Initialize Cart
+        // We look in "localStorage" (the browser's memory) to see if we have saved a cart previously.
+        // If yes, we load it. If not, we create an empty array [].
+        let cart = JSON.parse(localStorage.getItem('yourCarCart')) || [];
+
+        // 2. Format Currency Helper
+        // This function takes a number (like 110000) and turns it into text (like "$110,000").
+        // Parameters: amount (a number)
+        // Returns: formatted string
+        function formatMoney(amount) {
+            return "$" + amount.toLocaleString();
+        }
+
+        // 3. Render Cars to the Page
+        // This function loops through our carsData array and creates HTML for each car card,
+        // then injects it into the #carsContainer div on the page.
+        // Runs automatically when the page loads.
+        function renderCars() {
+            const container = document.getElementById('carsContainer');
+            container.innerHTML = ''; // Clear out any existing content
+
+            // Loop over each car in our data array
+            carsData.forEach(car => {
+                // Create a piece of HTML string for this car
+                const carHTML = `
+                    <div class="car-card">
+                        <img src="${car.imageUrl}" alt="${car.name}" class="car-image">
+                        <div class="car-content">
+                            <div class="car-category">${car.category}</div>
+                            <h3 class="car-title">${car.name}</h3>
+                            <p class="car-desc">${car.description}</p>
+                            <div class="car-features">
+                                <span>💺 ${car.seats} Seats</span>
+                                <span>🧳 ${car.luggage} Bags</span>
+                            </div>
+                            <div class="car-footer">
+                                <span class="car-price">${formatMoney(car.price)}</span>
+                                <!-- When clicked, this button calls the addToCart function with the car's ID -->
+                                <button class="btn-primary" onclick="addToCart(${car.id})">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                // Add this car's HTML to the container
+                container.innerHTML += carHTML;
+            });
+        }
+
+        // 4. Update the Cart Count in the Navbar
+        // This function calculates how many total items are in the cart and updates the small badge icon.
+        // Runs every time the cart changes or page loads.
+        function updateCartCount() {
+            const countElement = document.getElementById('cartCount');
+            // Calculate total quantity by adding up the quantity of each item in the cart
+            let totalItems = 0;
+            cart.forEach(item => {
+                totalItems += item.quantity;
+            });
+            countElement.textContent = totalItems;
+        }
+
+        // 5. Save Cart to Local Storage
+        // This function converts the cart array into text (JSON) and saves it to the browser's memory.
+        // Runs every time we add, remove, or change quantities.
+        function saveCart() {
+            localStorage.setItem('yourCarCart', JSON.stringify(cart));
+            // Always update UI when saving
+            updateCartCount();
+            renderCartItems(); 
+        }
+
+        // 6. Add a Car to the Cart
+        // This function runs when the user clicks "Add to Cart" on a car card.
+        // Parameters: carId (the ID number of the car to add)
+        function addToCart(carId) {
+            // Find the full car details from our carsData list
+            const carToAdd = carsData.find(car => car.id === carId);
+            
+            // Check if this car is already in the cart
+            const existingItem = cart.find(item => item.id === carId);
+
+            if (existingItem) {
+                // If it's already there, just increase the quantity
+                existingItem.quantity += 1;
+            } else {
+                // If it's new, add it to the cart list with quantity 1
+                cart.push({
+                    id: carToAdd.id,
+                    name: carToAdd.name,
+                    price: carToAdd.price,
+                    imageUrl: carToAdd.imageUrl,
+                    quantity: 1
+                });
+            }
+
+            // Save the updated cart and show an alert
+            saveCart();
+            alert(`${carToAdd.name} was added to your cart!`);
+        }
+
+        // 7. Render Cart Items inside the Modal
+        // This function builds the HTML to show the items inside the shopping cart modal.
+        function renderCartItems() {
+            const cartList = document.getElementById('cartItemsList');
+            const totalDisplay = document.getElementById('cartTotalDisplay');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            // If cart is empty, show a message and hide the checkout button
+            if (cart.length === 0) {
+                cartList.innerHTML = '<p style="text-align:center; padding: 20px; color: #64748b;">Your cart is empty.</p>';
+                totalDisplay.textContent = '$0';
+                checkoutBtn.style.display = 'none';
+                return;
+            }
+
+            // Otherwise, show the checkout button
+            checkoutBtn.style.display = 'block';
+            cartList.innerHTML = ''; // clear old html
+            let totalPrice = 0;
+
+            // Loop through the items in the cart
+            cart.forEach(item => {
+                // Calculate subtotal for this specific item (price x quantity)
+                const itemSubtotal = item.price * item.quantity;
+                totalPrice += itemSubtotal;
+
+                // Create the HTML for the item row
+                const itemHTML = `
+                    <div class="cart-item">
+                        <img src="${item.imageUrl}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">${formatMoney(item.price)}</div>
+                            <div class="cart-controls">
+                                <!-- Minus button: decreases quantity by 1 -->
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <!-- Plus button: increases quantity by 1 -->
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                                <!-- Remove button -->
+                                <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+                            </div>
+                        </div>
+                        <div style="font-weight: 600;">
+                            ${formatMoney(itemSubtotal)}
+                        </div>
+                    </div>
+                `;
+                cartList.innerHTML += itemHTML;
+            });
+
+            // Update the total price display
+            totalDisplay.textContent = formatMoney(totalPrice);
+        }
+
+        // 8. Update Item Quantity
+        // This function runs when the user clicks + or - inside the cart.
+        // Parameters: carId (ID of the car), change (1 to add, -1 to subtract)
+        function updateQuantity(carId, change) {
+            // Find the item in the cart
+            const item = cart.find(i => i.id === carId);
+            if (item) {
+                item.quantity += change;
+                // Prevent negative quantity or zero
+                if (item.quantity < 1) {
+                    item.quantity = 1; 
+                }
+                saveCart(); // Save changes
+            }
+        }
+
+        // 9. Remove Item from Cart
+        // This function runs when the user clicks "Remove" inside the cart.
+        // Parameters: carId (ID of the car to remove)
+        function removeFromCart(carId) {
+            // Keep all items EXCEPT the one with this ID
+            cart = cart.filter(item => item.id !== carId);
+            saveCart(); // Save changes
+        }
+
+        // 10. Open and Close Cart Modal
+        // Functions to show or hide the cart pop-up overlay.
+        function openCart() {
+            document.getElementById('cartModal').style.display = 'flex';
+            renderCartItems(); // Make sure the items are up to date when opened
+            cancelCheckout(); // Ensure checkout form is hidden when opening cart initially
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        // 11. Show Checkout Form
+        // Hides the cart items and shows the user input form.
+        function showCheckoutForm() {
+            document.getElementById('cartItemsList').style.display = 'none';
+            document.getElementById('modalFooter').style.display = 'none';
+            document.getElementById('checkoutForm').style.display = 'block';
+        }
+
+        // 12. Cancel Checkout
+        // Hides the input form and goes back to viewing the cart items.
+        function cancelCheckout() {
+            document.getElementById('cartItemsList').style.display = 'block';
+            document.getElementById('modalFooter').style.display = 'block';
+            document.getElementById('checkoutForm').style.display = 'none';
+        }
+
+        // 13. Handle Checkout Form Submit
+        // This runs when the user clicks "Complete Order" on the form.
+        // Parameter: event (the form submission event)
+        function handleCheckout(event) {
+            // Prevent the page from reloading, which is default form behavior
+            event.preventDefault();
+
+            // Calculate the final total one last time
+            let totalPrice = 0;
+            cart.forEach(item => {
+                totalPrice += (item.price * item.quantity);
+            });
+
+            // Get the user's name from the input field
+            const name = document.getElementById('custName').value;
+
+            // Show a simple alert
+            alert(`Thank you ${name}, your order has been placed. Total: ${formatMoney(totalPrice)}`);
+
+            // Clear the cart
+            cart = [];
+            saveCart(); // save the empty cart
+
+            // Close the modal
+            closeCart();
+
+            // Show the success banner at the top of the main page
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = `Order successful! Thank you for choosing YourCar, ${name}.`;
+            successDiv.style.display = 'block';
+
+            // Reset the form fields
+            document.getElementById('checkoutForm').reset();
+
+            // Hide the success message after 5 seconds
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // 14. Initial Page Load
+        // When the browser finishes loading the HTML, we run these functions to set everything up.
+        window.onload = () => {
+            renderCars();
+            updateCartCount();
+        };
+
+    </script>
+</body>
+</html>

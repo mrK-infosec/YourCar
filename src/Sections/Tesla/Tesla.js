@@ -17,15 +17,15 @@ const Tesla = () => {
   return (
     <section className="tesla container">
       <div className="car-collection">
-      <img className="imgcar1" src={imgCar1} alt="bugate"/>
-      <img className="imgcar2" src={imgCar2} alt="bugate"/>
-      <img className="imgcar3" src={imgCar3} alt="bugate"/>
-      <img className="imgcar4" src={imgCar4} alt="bugate"/>
-      <img className="imgmid" src={imgmid} alt="bugate"/>
-      <img className="imgcar5" src={imgCar5} alt="bugate"/>
-      <img className="imgcar8" src={imgCar8} alt="bugate"/>
-      <img className="imgcar7" src={imgCar7} alt="bugate"/>
-      <img className="imgcar6" src={imgCar6} alt="bugate"/>
+      <img className="imgcar1" src={imgCar1} alt="Tesla Model 3 Side View"/>
+      <img className="imgcar2" src={imgCar2} alt="Tesla Model 3 Front View"/>
+      <img className="imgcar3" src={imgCar3} alt="Tesla Model 3 Close Up"/>
+      <img className="imgcar4" src={imgCar4} alt="Tesla Model 3 Interior"/>
+      <img className="imgmid" src={imgmid} alt="Tesla Model 3 Showroom Center"/>
+      <img className="imgcar5" src={imgCar5} alt="Tesla Model 3 Rear Angle"/>
+      <img className="imgcar8" src={imgCar8} alt="Tesla Model 3 Detail"/>
+      <img className="imgcar7" src={imgCar7} alt="Tesla Model 3 Dashboard"/>
+      <img className="imgcar6" src={imgCar6} alt="Tesla Model 3 Headlights"/>
       </div>
       <div className="textBox-container">
         <div className="titleBox">
