@@ -18,6 +18,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import CartModal from './components/CartModal';
 import { Toaster } from 'react-hot-toast';
+import { HelmetProvider } from 'react-helmet-async';
 import { Car, Compass, Mail, Phone, MapPin } from 'lucide-react';
 
 // Lazy loaded pages to optimize bundle size and speed up initial page load
@@ -25,6 +26,7 @@ const HomePage = lazy(() => import('./pages/HomePage'));
 const CarDetailsPage = lazy(() => import('./pages/CarDetailsPage'));
 const OrderTrackingPage = lazy(() => import('./pages/OrderTrackingPage'));
 const AdminPage = lazy(() => import('./pages/AdminPage'));
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 
 // A loading fallback component for Suspense
 const PageLoader = () => (
@@ -42,8 +44,9 @@ const App = () => {
   const closeCart = () => setIsCartOpen(false);
 
   return (
-    // Central container with our dark branding background color
-    <div className="min-h-screen bg-brand-dark flex flex-col justify-between text-brand-steel">
+    <HelmetProvider>
+      {/* Central container with our dark branding background color */}
+      <div className="min-h-screen bg-brand-dark flex flex-col justify-between text-brand-steel">
       
       {/* 1. TOAST NOTIFICATION CONTAINER */}
       {/* Renders global notifications with customized dark glass templates */}
@@ -78,6 +81,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/cars/:id" element={<CarDetailsPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/track" element={<OrderTrackingPage />} />
             <Route path="/admin" element={<AdminPage />} />
           </Routes>
@@ -154,7 +158,8 @@ const App = () => {
         </div>
       </footer>
 
-    </div>
+      </div>
+    </HelmetProvider>
   );
 };
 

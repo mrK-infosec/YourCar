@@ -7,6 +7,7 @@
 
 // Import the Car model to query database collections
 const Car = require('../models/Car');
+const { generateFallbackCars } = require('../utils/fallbackData');
 
 /**
  * @desc    Retrieve all cars
@@ -54,17 +55,50 @@ exports.getCars = async (req, res, next) => {
 
     // Pagination
     const page = parseInt(req.query.page, 10) || 1;
-    // Hard cap limit at 50 to prevent memory leak and unbounded queries
+    // Hard cap limit at 500 to prevent memory leak and unbounded queries
     let limit = parseInt(req.query.limit, 10) || 10;
-    if (limit > 50) {
-      limit = 50; 
+    if (limit > 500) {
+      limit = 500; 
     }
     const skip = (page - 1) * limit;
 
     query = query.skip(skip).limit(limit);
 
     // Executing query
-    const cars = await query;
+    let cars = await query;
+    let fallbackUsed = false;
+
+    // MAGICAL FALLBACK: If MongoDB is empty, instantly inject premium mock data!
+    if (!cars || cars.length === 0) {
+      fallbackUsed = true;
+      cars = generateFallbackCars();
+    }
+
+    // Handle fallback pagination manually since Mongoose skip/limit won't apply to raw array
+    if (fallbackUsed) {
+      if (reqQuery.category) {
+        cars = cars.filter(c => c.category === reqQuery.category);
+      }
+      
+      const page = parseInt(req.query.page, 10) || 1;
+      let limit = parseInt(req.query.limit, 10) || 10;
+      if (limit > 500) limit = 500;
+      const skip = (page - 1) * limit;
+      
+      const paginated = cars.slice(skip, skip + limit);
+      
+      return res.status(200).json({
+        success: true,
+        count: paginated.length,
+        pagination: {
+          page,
+          limit,
+          total: cars.length
+        },
+        data: paginated,
+        isFallback: true
+      });
+    }
 
     // Respond with a 200 OK and the list of cars
     res.status(200).json({
@@ -74,11 +108,36 @@ exports.getCars = async (req, res, next) => {
         page,
         limit
       },
-      data: cars
+      data: cars,
+      isFallback: false
     });
   } catch (error) {
-    // If an error happens, pass it to the global error handler middleware
-    next(error);
+    // If MongoDB is offline, return the fallback data instead of crashing!
+    let cars = generateFallbackCars();
+    
+    // Check if there was a category filter intended in req.query
+    if (req.query && req.query.category) {
+      cars = cars.filter(c => c.category === req.query.category);
+    }
+    
+    // Apply pagination
+    const page = parseInt(req.query.page, 10) || 1;
+    let limit = parseInt(req.query.limit, 10) || 10;
+    if (limit > 500) limit = 500;
+    const skip = (page - 1) * limit;
+    const paginated = cars.slice(skip, skip + limit);
+
+    res.status(200).json({
+      success: true,
+      count: paginated.length,
+      pagination: {
+        page,
+        limit,
+        total: cars.length
+      },
+      data: paginated,
+      isFallback: true
+    });
   }
 };
 
@@ -89,6 +148,16 @@ exports.getCars = async (req, res, next) => {
  */
 exports.getCarById = async (req, res, next) => {
   try {
+    // Check if the requested ID is a mock ID from the fallback generator
+    if (req.params.id && req.params.id.startsWith('mock_car_')) {
+      const { generateFallbackCars } = require('../utils/fallbackData');
+      const mockCars = generateFallbackCars();
+      const fallbackCar = mockCars.find(c => c._id === req.params.id);
+      if (fallbackCar) {
+        return res.status(200).json({ success: true, data: fallbackCar, isFallback: true });
+      }
+    }
+
     // Find car by its ID in MongoDB
     const car = await Car.findById(req.params.id);
 
@@ -104,7 +173,16 @@ exports.getCarById = async (req, res, next) => {
       data: car
     });
   } catch (error) {
-    // Pass any errors to our global handler (e.g. invalid ID format errors)
+    // If MongoDB is offline, try fallback search one last time
+    const { generateFallbackCars } = require('../utils/fallbackData');
+    const mockCars = generateFallbackCars();
+    const mockCar = mockCars.find(c => c._id === req.params.id);
+    
+    if (mockCar) {
+      return res.status(200).json({ success: true, data: mockCar, isFallback: true });
+    }
+
+    // Pass any errors to our global handler
     next(error);
   }
 };

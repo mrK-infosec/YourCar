@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap');
+
 /* Import standard Tailwind CSS layers */
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 @tailwind utilities;
 
 /* Custom Base layer to set our custom premium typography and page scrollbars */
@@ -81,5 +84,11 @@
   /* Input fields focusing effects */
   .form-input {
     @apply bg-black bg-opacity-40 border border-brand-charcoal text-white rounded-md py-2.5 px-4 outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all duration-300 placeholder:text-gray-600;
+  }
+}
+
+@layer utilities {
+  .font-arabic {
+    font-family: 'Cairo', sans-serif;
   }
 }

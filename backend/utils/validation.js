@@ -51,7 +51,7 @@ const validateCar = [
   body('price')
     .notEmpty().withMessage('Car price is required')
     .isNumeric().withMessage('Price must be a number')
-    .float({ min: 0 }).withMessage('Price must be at least 0'),
+    .isFloat({ min: 0 }).withMessage('Price must be at least 0'),
     
   body('imageUrl')
     .notEmpty().withMessage('Image URL is required')
@@ -121,7 +121,7 @@ const validateOrder = [
   body('items.*.price')
     .notEmpty().withMessage('Item price is required')
     .isNumeric().withMessage('Item price must be a number')
-    .float({ min: 0 }).withMessage('Item price cannot be negative'),
+    .isFloat({ min: 0 }).withMessage('Item price cannot be negative'),
     
   body('items.*.quantity')
     .notEmpty().withMessage('Item quantity is required')
@@ -130,7 +130,7 @@ const validateOrder = [
   body('totalAmount')
     .notEmpty().withMessage('Total payment amount is required')
     .isNumeric().withMessage('Total amount must be a number')
-    .float({ min: 0 }).withMessage('Total amount cannot be negative'),
+    .isFloat({ min: 0 }).withMessage('Total amount cannot be negative'),
     
   checkValidationErrors
 ];

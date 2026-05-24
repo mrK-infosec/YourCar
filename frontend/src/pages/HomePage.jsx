@@ -29,8 +29,8 @@ const HomePage = () => {
     const fetchInventory = async () => {
       try {
         setLoading(true);
-        // GET /api/cars using Axios instance
-        const response = await api.get('/cars');
+        // GET /api/cars using Axios instance - fetching 500 to ensure we have all fallback cars!
+        const response = await api.get('/cars?limit=500');
         
         if (response.data.success) {
           // Backward compatibility for both v1 array and v2 paginated { cars: [] } structure
