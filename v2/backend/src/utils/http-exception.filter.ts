@@ -17,6 +17,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     let message = 'Internal server error';
     let code = 'INTERNAL_SERVER_ERROR';
 
+    let details: any = undefined;
+
     if (exception instanceof HttpException) {
       status = exception.getStatus();
       const resContent = exception.getResponse();
@@ -24,6 +26,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       if (typeof resContent === 'object' && resContent !== null) {
         message = (resContent as any).message || exception.message;
         code = (resContent as any).error || 'BAD_REQUEST';
+        details = (resContent as any).details || undefined;
       } else {
         message = exception.message;
         code = exception.name || 'HTTP_EXCEPTION';
@@ -41,7 +44,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
       error: {
         message,
         code,
+        ...(details ? { details } : {}),
       },
     });
   }
 }
+

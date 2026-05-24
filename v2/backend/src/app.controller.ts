@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Query, Body, UsePipes, BadRequestException } from '@nestjs/common';
-import { InjectConnection } from '@nestjs/mongoose';
-import { Connection } from 'mongoose';
+import { Controller, Get, Post, Query, Body, UsePipes, BadRequestException, Req } from '@nestjs/common';
+import { Request } from 'express';
 import { ZodValidationPipe } from './utils/zod-validation.pipe';
 import { z } from 'zod';
+import { AppService } from './app.service';
 
 const TestValidationSchema = z.object({
   name: z.string().min(3, { message: 'Name must be at least 3 characters' }),
@@ -14,28 +14,30 @@ type TestDto = z.infer<typeof TestValidationSchema>;
 
 @Controller('api')
 export class AppController {
-  constructor(@InjectConnection() private connection: Connection) {
-    console.log('Injected Mongoose connection:', connection ? 'defined' : 'undefined');
-    if (connection) {
-      console.log('ReadyState:', connection.readyState);
-    }
-  }
+  constructor(private readonly appService: AppService) {}
 
   @Get('status')
-  getStatus(@Query('trigger-error') triggerError?: string) {
+  async getStatus(@Query('trigger-error') triggerError?: string, @Req() req?: any) {
     if (triggerError === 'true') {
       throw new BadRequestException('Verification exception forced by status debug flag!');
     }
 
-    const isConnected = this.connection && this.connection.readyState === 1;
-    const readyState = this.connection ? this.connection.readyState : 0;
-    const dbName = this.connection && this.connection.db ? this.connection.db.databaseName : 'offline';
+    const requestId = req?.headers['x-request-id'] || 'no-trace';
+    const startMemory = process.memoryUsage().heapUsed;
 
-    return {
-      connected: isConnected,
-      readyState: readyState,
-      name: dbName,
-    };
+    // Delegate business and database query logic to service & repository layers
+    const dbStatus = await this.appService.getDatabaseStatus();
+
+    const endMemory = process.memoryUsage().heapUsed;
+    const memoryDeltaKB = Math.round((endMemory - startMemory) / 1024);
+
+    console.log(
+      `[Metrics] RequestID: ${requestId} | Memory Delta: ${memoryDeltaKB} KB | Current Heap: ${Math.round(
+        endMemory / 1024 / 1024
+      )} MB`
+    );
+
+    return dbStatus;
   }
 
   @Post('test-validation')

@@ -1,5 +1,5 @@
-import { Connection } from 'mongoose';
 import { z } from 'zod';
+import { AppService } from './app.service';
 declare const TestValidationSchema: z.ZodObject<{
     name: z.ZodString;
     age: z.ZodNumber;
@@ -7,13 +7,9 @@ declare const TestValidationSchema: z.ZodObject<{
 }, z.core.$strip>;
 type TestDto = z.infer<typeof TestValidationSchema>;
 export declare class AppController {
-    private connection;
-    constructor(connection: Connection);
-    getStatus(triggerError?: string): {
-        connected: boolean;
-        readyState: number;
-        name: string;
-    };
+    private readonly appService;
+    constructor(appService: AppService);
+    getStatus(triggerError?: string, req?: any): Promise<import("./repositories/app.repository").DatabaseStatus>;
     testValidation(body: TestDto): {
         message: string;
         payload: {

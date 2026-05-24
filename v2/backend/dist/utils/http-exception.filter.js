@@ -15,12 +15,14 @@ let HttpExceptionFilter = class HttpExceptionFilter {
         let status = common_1.HttpStatus.INTERNAL_SERVER_ERROR;
         let message = 'Internal server error';
         let code = 'INTERNAL_SERVER_ERROR';
+        let details = undefined;
         if (exception instanceof common_1.HttpException) {
             status = exception.getStatus();
             const resContent = exception.getResponse();
             if (typeof resContent === 'object' && resContent !== null) {
                 message = resContent.message || exception.message;
                 code = resContent.error || 'BAD_REQUEST';
+                details = resContent.details || undefined;
             }
             else {
                 message = exception.message;
@@ -37,6 +39,7 @@ let HttpExceptionFilter = class HttpExceptionFilter {
             error: {
                 message,
                 code,
+                ...(details ? { details } : {}),
             },
         });
     }

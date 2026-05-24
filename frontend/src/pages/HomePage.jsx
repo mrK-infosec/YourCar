@@ -33,8 +33,10 @@ const HomePage = () => {
         const response = await api.get('/cars');
         
         if (response.data.success) {
-          setCars(response.data.data);
-          setFilteredCars(response.data.data); // Initialize filtered list with full set
+          // Backward compatibility for both v1 array and v2 paginated { cars: [] } structure
+          const carsList = response.data.data.cars || response.data.data;
+          setCars(carsList);
+          setFilteredCars(carsList); // Initialize filtered list with full set
         } else {
           toast.error('Failed to load vehicle catalog.');
         }

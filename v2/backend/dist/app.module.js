@@ -38,20 +38,31 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const car_controller_1 = require("./controllers/car.controller");
+const car_service_1 = require("./services/car.service");
+const car_repository_1 = require("./repositories/car.repository");
 const logging_middleware_1 = require("./middleware/logging.middleware");
+const request_id_middleware_1 = require("./middleware/request-id.middleware");
+const app_repository_1 = require("./repositories/app.repository");
+const cache_service_1 = require("./services/cache.service");
 const mongoose_1 = require("@nestjs/mongoose");
+const configuration_1 = __importDefault(require("./config/configuration"));
 const mongoose = __importStar(require("mongoose"));
+const config = (0, configuration_1.default)();
 const mongooseConnectionProvider = {
     provide: (0, mongoose_1.getConnectionToken)(),
     useFactory: async () => {
         try {
             console.log('Attempting singleton MongoDB connection...');
-            await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/revora_v2', {
+            await mongoose.connect(config.mongodbUri, {
                 maxPoolSize: 50,
                 serverSelectionTimeoutMS: 2000,
             });
@@ -67,15 +78,24 @@ const mongooseConnectionProvider = {
 };
 let AppModule = class AppModule {
     configure(consumer) {
-        consumer.apply(logging_middleware_1.LoggingMiddleware).forRoutes('*');
+        consumer
+            .apply(request_id_middleware_1.RequestIdMiddleware, logging_middleware_1.LoggingMiddleware)
+            .forRoutes('*');
     }
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService, mongooseConnectionProvider],
+        controllers: [app_controller_1.AppController, car_controller_1.CarController],
+        providers: [
+            app_service_1.AppService,
+            app_repository_1.AppRepository,
+            car_service_1.CarService,
+            car_repository_1.CarRepository,
+            cache_service_1.CacheService,
+            mongooseConnectionProvider,
+        ],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

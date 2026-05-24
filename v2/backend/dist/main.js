@@ -40,17 +40,21 @@ const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
 const http_exception_filter_1 = require("./utils/http-exception.filter");
 const transform_interceptor_1 = require("./utils/transform.interceptor");
+const configuration_1 = require("./config/configuration");
+const structured_logger_1 = require("./utils/structured-logger");
 const helmet_1 = __importDefault(require("helmet"));
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const express = __importStar(require("express"));
 async function bootstrap() {
-    const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    const config = (0, configuration_1.getConfiguration)();
+    const logger = new structured_logger_1.StructuredLogger();
+    const app = await core_1.NestFactory.create(app_module_1.AppModule, { logger });
     app.use((0, helmet_1.default)());
     app.use(express.json({ limit: '10kb' }));
     app.use(express.urlencoded({ extended: true, limit: '10kb' }));
     app.use('/api', (0, express_rate_limit_1.default)({
         windowMs: 15 * 60 * 1000,
-        max: 100,
+        max: config.rateLimitMax,
         message: {
             success: false,
             error: {
@@ -64,17 +68,17 @@ async function bootstrap() {
     app.useGlobalFilters(new http_exception_filter_1.HttpExceptionFilter());
     app.useGlobalInterceptors(new transform_interceptor_1.TransformInterceptor());
     app.enableCors({
-        origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+        origin: config.corsOrigins,
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-ID'],
     });
-    const port = process.env.PORT ?? 5000;
-    await app.listen(port);
-    console.log(`=========================================`);
-    console.log(` Revora v2 NestJS Backend booting...`);
-    console.log(` Listening on: http://localhost:${port}`);
-    console.log(`=========================================`);
+    await app.listen(config.port);
+    logger.log(`=========================================`, 'Bootstrap');
+    logger.log(` Revora v2 NestJS Backend booting...`, 'Bootstrap');
+    logger.log(` Environment: [${config.nodeEnv}]`, 'Bootstrap');
+    logger.log(` Listening on: http://localhost:${config.port}`, 'Bootstrap');
+    logger.log(`=========================================`, 'Bootstrap');
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

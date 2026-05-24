@@ -14,36 +14,30 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
-const mongoose_1 = require("@nestjs/mongoose");
-const mongoose_2 = require("mongoose");
 const zod_validation_pipe_1 = require("./utils/zod-validation.pipe");
 const zod_1 = require("zod");
+const app_service_1 = require("./app.service");
 const TestValidationSchema = zod_1.z.object({
     name: zod_1.z.string().min(3, { message: 'Name must be at least 3 characters' }),
     age: zod_1.z.number().min(18, { message: 'Must be at least 18 years old' }),
     email: zod_1.z.string().email({ message: 'Must be a valid UAE email format' }),
 });
 let AppController = class AppController {
-    connection;
-    constructor(connection) {
-        this.connection = connection;
-        console.log('Injected Mongoose connection:', connection ? 'defined' : 'undefined');
-        if (connection) {
-            console.log('ReadyState:', connection.readyState);
-        }
+    appService;
+    constructor(appService) {
+        this.appService = appService;
     }
-    getStatus(triggerError) {
+    async getStatus(triggerError, req) {
         if (triggerError === 'true') {
             throw new common_1.BadRequestException('Verification exception forced by status debug flag!');
         }
-        const isConnected = this.connection && this.connection.readyState === 1;
-        const readyState = this.connection ? this.connection.readyState : 0;
-        const dbName = this.connection && this.connection.db ? this.connection.db.databaseName : 'offline';
-        return {
-            connected: isConnected,
-            readyState: readyState,
-            name: dbName,
-        };
+        const requestId = req?.headers['x-request-id'] || 'no-trace';
+        const startMemory = process.memoryUsage().heapUsed;
+        const dbStatus = await this.appService.getDatabaseStatus();
+        const endMemory = process.memoryUsage().heapUsed;
+        const memoryDeltaKB = Math.round((endMemory - startMemory) / 1024);
+        console.log(`[Metrics] RequestID: ${requestId} | Memory Delta: ${memoryDeltaKB} KB | Current Heap: ${Math.round(endMemory / 1024 / 1024)} MB`);
+        return dbStatus;
     }
     testValidation(body) {
         return {
@@ -56,9 +50,10 @@ exports.AppController = AppController;
 __decorate([
     (0, common_1.Get)('status'),
     __param(0, (0, common_1.Query)('trigger-error')),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
 ], AppController.prototype, "getStatus", null);
 __decorate([
     (0, common_1.Post)('test-validation'),
@@ -70,7 +65,6 @@ __decorate([
 ], AppController.prototype, "testValidation", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)('api'),
-    __param(0, (0, mongoose_1.InjectConnection)()),
-    __metadata("design:paramtypes", [mongoose_2.Connection])
+    __metadata("design:paramtypes", [app_service_1.AppService])
 ], AppController);
 //# sourceMappingURL=app.controller.js.map

@@ -57,7 +57,9 @@ const AdminPage = () => {
         ]);
 
         if (ordersRes.data.success) setOrders(ordersRes.data.data);
-        if (carsRes.data.success) setCars(carsRes.data.data);
+        if (carsRes.data.success) {
+          setCars(carsRes.data.data.cars || carsRes.data.data);
+        }
       } catch (error) {
         console.error('Error fetching admin data:', error);
         toast.error('Session expired or access denied. Please log in again.');
@@ -209,7 +211,9 @@ const AdminPage = () => {
         
         // Refresh local car list state
         const refreshedCars = await api.get('/cars');
-        if (refreshedCars.data.success) setCars(refreshedCars.data.data);
+        if (refreshedCars.data.success) {
+          setCars(refreshedCars.data.data.cars || refreshedCars.data.data);
+        }
       }
     } catch (error) {
       const serverMessage = error.response?.data?.message || 'Transaction failed. Check inputs.';
