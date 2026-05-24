@@ -24,16 +24,16 @@
   }
   
   ::-webkit-scrollbar-track {
-    background: #0B0C10;
+    background: #0A0A0A;
   }
   
   ::-webkit-scrollbar-thumb {
-    background: #1F2833;
+    background: #1A1A1A;
     border-radius: 4px;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: #45A29E;
+    background: #E60000;
   }
 }
 
@@ -54,9 +54,9 @@
   }
   
   .glass-card-interactive:hover {
-    background: rgba(31, 40, 51, 0.65);
-    border-color: rgba(102, 252, 241, 0.25);
-    box-shadow: 0 12px 40px 0 rgba(102, 252, 241, 0.08);
+    background: rgba(26, 26, 26, 0.65);
+    border-color: rgba(230, 0, 0, 0.25);
+    box-shadow: 0 12px 40px 0 rgba(230, 0, 0, 0.08);
     transform: translateY(-4px);
   }
 
@@ -68,18 +68,18 @@
     border-left: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  /* Luxury gold outline button */
-  .btn-gold {
-    @apply border border-brand-gold text-brand-gold bg-transparent font-medium py-2.5 px-6 rounded-md hover:bg-brand-gold hover:text-black transition-all duration-300 active:scale-95;
+  /* Luxury silver outline button */
+  .btn-silver {
+    @apply border border-brand-silver text-brand-silver bg-transparent font-medium py-2.5 px-6 rounded-md hover:bg-brand-silver hover:text-black transition-all duration-300 active:scale-95;
   }
 
-  /* Luxury Teal/Cyan action button */
-  .btn-teal {
-    @apply bg-brand-teal text-black font-semibold py-2.5 px-6 rounded-md hover:bg-opacity-85 hover:shadow-[0_0_15px_rgba(102,252,241,0.4)] transition-all duration-300 active:scale-95;
+  /* Luxury Red action button */
+  .btn-red {
+    @apply bg-brand-red text-white font-semibold py-2.5 px-6 rounded-md hover:bg-opacity-85 hover:shadow-[0_0_15px_rgba(230,0,0,0.4)] transition-all duration-300 active:scale-95;
   }
 
   /* Input fields focusing effects */
   .form-input {
-    @apply bg-black bg-opacity-40 border border-brand-charcoal text-white rounded-md py-2.5 px-4 outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition-all duration-300 placeholder:text-gray-600;
+    @apply bg-black bg-opacity-40 border border-brand-charcoal text-white rounded-md py-2.5 px-4 outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition-all duration-300 placeholder:text-gray-600;
   }
 }

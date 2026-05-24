@@ -103,7 +103,7 @@ const OrderTrackingPage = () => {
       
       {/* HEADER CAPTION */}
       <div className="text-center space-y-2">
-        <span className="text-brand-teal text-xs font-bold uppercase tracking-widest">Order Tracking</span>
+        <span className="text-brand-red text-xs font-bold uppercase tracking-widest">Order Tracking</span>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white">Track Your Car Purchase</h1>
         <p className="max-w-md mx-auto text-brand-steel text-xs text-opacity-80">
           Enter your unique Order Number and associated Phone Number to view your contract's real-time shipment status.
@@ -144,7 +144,7 @@ const OrderTrackingPage = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full btn-teal text-sm py-2.5 flex items-center justify-center space-x-1.5"
+              className="w-full btn-red text-sm py-2.5 flex items-center justify-center space-x-1.5"
             >
               {loading ? (
                 <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></span>
@@ -173,7 +173,7 @@ const OrderTrackingPage = () => {
                 {/* Active progress color indicator line */}
                 {currentStepIndex > 0 && (
                   <div 
-                    className="absolute top-[26px] left-[5%] h-0.5 bg-brand-teal z-0 transition-all duration-500 ease-out"
+                    className="absolute top-[26px] left-[5%] h-0.5 bg-brand-red z-0 transition-all duration-500 ease-out"
                     style={{ width: `${(currentStepIndex / 3) * 90}%` }}
                   ></div>
                 )}
@@ -191,9 +191,9 @@ const OrderTrackingPage = () => {
                       <div 
                         className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 border ${
                           isCompleted 
-                            ? 'bg-brand-teal text-black border-brand-teal shadow-[0_0_12px_rgba(102,252,241,0.25)]' 
+                            ? 'bg-brand-red text-black border-brand-red shadow-[0_0_12px_rgba(102,252,241,0.25)]' 
                             : isActive 
-                            ? 'bg-[#0B0C10] text-brand-teal border-brand-teal shadow-[0_0_15px_rgba(102,252,241,0.35)] animate-pulse-subtle' 
+                            ? 'bg-brand-dark text-brand-red border-brand-red shadow-[0_0_15px_rgba(102,252,241,0.35)] animate-pulse-subtle' 
                             : 'bg-brand-charcoal text-brand-steel border-white border-opacity-5'
                         }`}
                       >
@@ -202,7 +202,7 @@ const OrderTrackingPage = () => {
                       
                       {/* Labels */}
                       <div className="text-center mt-3">
-                        <h4 className={`text-xs font-bold ${isActive ? 'text-brand-teal' : isFuture ? 'text-gray-500' : 'text-white'}`}>
+                        <h4 className={`text-xs font-bold ${isActive ? 'text-brand-red' : isFuture ? 'text-gray-500' : 'text-white'}`}>
                           {step.title}
                         </h4>
                         <span className="text-[9px] text-gray-500 uppercase font-medium mt-0.5 block">{step.desc}</span>
@@ -246,7 +246,7 @@ const OrderTrackingPage = () => {
 
                 <div className="space-y-1.5 pt-2 border-t border-brand-charcoal">
                   <div className="flex items-center space-x-1.5 text-gray-500">
-                    <MapPin size={12} className="text-brand-teal" />
+                    <MapPin size={12} className="text-brand-red" />
                     <span className="text-[10px] uppercase tracking-widest">Delivery Address</span>
                   </div>
                   <span className="font-medium text-brand-steel leading-relaxed block">{order.customer.address}</span>
@@ -270,7 +270,7 @@ const OrderTrackingPage = () => {
                         {formatPrice(item.price)} x {item.quantity}
                       </span>
                     </div>
-                    <span className="font-bold text-brand-teal">
+                    <span className="font-bold text-brand-red">
                       {formatPrice(item.price * item.quantity)}
                     </span>
                   </div>
@@ -280,7 +280,7 @@ const OrderTrackingPage = () => {
               {/* Grand Total */}
               <div className="border-t border-brand-charcoal pt-4 flex justify-between items-baseline mt-auto">
                 <span className="text-brand-steel text-xs font-semibold">Total Amount:</span>
-                <span className="text-[#D4AF37] text-xl font-black">
+                <span className="text-brand-silver text-xl font-black">
                   {formatPrice(order.totalAmount)}
                 </span>
               </div>

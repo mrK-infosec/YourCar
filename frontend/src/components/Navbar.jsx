@@ -46,12 +46,12 @@ const Navbar = ({ onCartClick }) => {
         <div className="flex justify-between items-center">
           {/* LOGO SECTION */}
           <Link to="/" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-tr from-brand-teal to-brand-emerald flex items-center justify-center text-black shadow-md group-hover:scale-105 transition-transform duration-300">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-tr from-brand-red to-brand-emerald flex items-center justify-center text-black shadow-md group-hover:scale-105 transition-transform duration-300">
               <Car size={22} className="stroke-[2.5]" />
             </div>
             <div>
-              <span className="font-extrabold text-2xl tracking-tight text-white font-sans group-hover:text-brand-teal transition-colors duration-300">
-                TIMGAD<span className="text-brand-teal font-normal ml-0.5">MOTORS</span>
+              <span className="font-extrabold text-2xl tracking-tight text-white font-sans group-hover:text-brand-red transition-colors duration-300">
+                REV<span className="text-brand-red font-normal ml-0.5">ORA</span>
               </span>
             </div>
           </Link>
@@ -60,8 +60,8 @@ const Navbar = ({ onCartClick }) => {
           <div className="hidden md:flex items-center space-x-8">
             <Link
               to="/"
-              className={`text-sm font-medium tracking-wide transition-colors duration-300 hover:text-brand-teal ${
-                isActive('/') ? 'text-brand-teal font-semibold' : 'text-brand-steel'
+              className={`text-sm font-medium tracking-wide transition-colors duration-300 hover:text-brand-red ${
+                isActive('/') ? 'text-brand-red font-semibold' : 'text-brand-steel'
               }`}
             >
               Browse Cars
@@ -69,8 +69,8 @@ const Navbar = ({ onCartClick }) => {
             
             <Link
               to="/track"
-              className={`flex items-center space-x-1.5 text-sm font-medium tracking-wide transition-colors duration-300 hover:text-brand-teal ${
-                isActive('/track') ? 'text-brand-teal font-semibold' : 'text-brand-steel'
+              className={`flex items-center space-x-1.5 text-sm font-medium tracking-wide transition-colors duration-300 hover:text-brand-red ${
+                isActive('/track') ? 'text-brand-red font-semibold' : 'text-brand-steel'
               }`}
             >
               <ClipboardList size={16} />
@@ -79,8 +79,8 @@ const Navbar = ({ onCartClick }) => {
 
             <Link
               to="/admin"
-              className={`flex items-center space-x-1.5 text-sm font-medium tracking-wide transition-colors duration-300 hover:text-brand-teal ${
-                isActive('/admin') ? 'text-brand-teal font-semibold' : 'text-brand-steel'
+              className={`flex items-center space-x-1.5 text-sm font-medium tracking-wide transition-colors duration-300 hover:text-brand-red ${
+                isActive('/admin') ? 'text-brand-red font-semibold' : 'text-brand-steel'
               }`}
             >
               <UserCog size={16} />
@@ -93,14 +93,14 @@ const Navbar = ({ onCartClick }) => {
             {/* CART TRIGGER BUTTON */}
             <button
               onClick={onCartClick}
-              className="relative p-2.5 rounded-full bg-brand-charcoal text-white hover:text-brand-teal border border-white border-opacity-5 hover:border-brand-teal hover:border-opacity-30 transition-all duration-300 group shadow-md"
+              className="relative p-2.5 rounded-full bg-brand-charcoal text-white hover:text-brand-red border border-white border-opacity-5 hover:border-brand-red hover:border-opacity-30 transition-all duration-300 group shadow-md"
               aria-label="Open shopping cart"
             >
               <ShoppingBag size={20} className="group-hover:scale-110 transition-transform duration-300" />
               
               {/* Dynamic Notification Badge showing item quantity */}
               {getCartCount() > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-brand-teal text-black text-xs font-bold rounded-full flex items-center justify-center animate-bounce shadow-md">
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-brand-red text-black text-xs font-bold rounded-full flex items-center justify-center animate-bounce shadow-md">
                   {getCartCount()}
                 </span>
               )}
@@ -125,7 +125,7 @@ const Navbar = ({ onCartClick }) => {
             to="/"
             onClick={() => setIsMobileMenuOpen(false)}
             className={`block text-base font-medium py-2 ${
-              isActive('/') ? 'text-brand-teal' : 'text-brand-steel'
+              isActive('/') ? 'text-brand-red' : 'text-brand-steel'
             }`}
           >
             Browse Cars
@@ -135,7 +135,7 @@ const Navbar = ({ onCartClick }) => {
             to="/track"
             onClick={() => setIsMobileMenuOpen(false)}
             className={`flex items-center space-x-2 text-base font-medium py-2 ${
-              isActive('/track') ? 'text-brand-teal' : 'text-brand-steel'
+              isActive('/track') ? 'text-brand-red' : 'text-brand-steel'
             }`}
           >
             <ClipboardList size={18} />
@@ -146,7 +146,7 @@ const Navbar = ({ onCartClick }) => {
             to="/admin"
             onClick={() => setIsMobileMenuOpen(false)}
             className={`flex items-center space-x-2 text-base font-medium py-2 ${
-              isActive('/admin') ? 'text-brand-teal' : 'text-brand-steel'
+              isActive('/admin') ? 'text-brand-red' : 'text-brand-steel'
             }`}
           >
             <UserCog size={18} />

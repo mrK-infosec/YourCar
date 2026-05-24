@@ -15,7 +15,7 @@ const Car = require('../models/Car');
  */
 exports.createOrder = async (req, res, next) => {
   try {
-    const { customer, items, totalAmount } = req.body;
+    const { customer, items, totalAmount, paymentMethod, installments } = req.body;
 
     // 1. Generate a unique order tracking number in the format "TM-XXXXXXXXX" (9 digits)
     let isUnique = false;
@@ -49,6 +49,8 @@ exports.createOrder = async (req, res, next) => {
       customer,
       items,
       totalAmount,
+      paymentMethod: paymentMethod || 'card',
+      installments,
       status: 'pending' // Orders start in 'pending' phase
     });
 

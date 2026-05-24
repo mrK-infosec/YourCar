@@ -1,7 +1,7 @@
 {
-  "name": "timgad-motors-backend",
+  "name": "revora-backend",
   "version": "1.0.0",
-  "description": "Backend API for Timgad Motors MERN Car E-Commerce Platform",
+  "description": "Backend API for Revora MERN Car E-Commerce Platform",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

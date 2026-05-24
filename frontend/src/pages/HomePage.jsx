@@ -1,6 +1,6 @@
 /**
  * HOME PAGE PAGE
- * The primary client-facing page of Timgad Motors (YourCar).
+ * The primary client-facing page of Revora (Revora).
  * Features:
  * 1. Hero Section: Catchy marketing text, modern dark overlay styling, call-to-actions.
  * 2. Services Section: Informative boxes detailing Sales, Rentals, and Trades.
@@ -73,18 +73,18 @@ const HomePage = () => {
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
         
         {/* Animated Background decorative light blots */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-brand-teal opacity-[0.03] blur-[100px] animate-pulse-subtle"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-brand-gold opacity-[0.03] blur-[100px] animate-pulse-subtle"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-brand-red opacity-[0.03] blur-[100px] animate-pulse-subtle"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-brand-silver opacity-[0.03] blur-[100px] animate-pulse-subtle"></div>
 
         {/* Content Box */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8 animate-slide-up">
-          <div className="inline-flex items-center space-x-2 bg-brand-charcoal bg-opacity-50 px-4 py-1.5 rounded-full border border-white border-opacity-5 text-xs text-brand-teal">
+          <div className="inline-flex items-center space-x-2 bg-brand-charcoal bg-opacity-50 px-4 py-1.5 rounded-full border border-white border-opacity-5 text-xs text-brand-red">
             <Sparkles size={14} className="animate-spin [animation-duration:4s]" />
-            <span className="font-semibold uppercase tracking-wider">Welcome to Timgad Motors</span>
+            <span className="font-semibold uppercase tracking-wider">Welcome to Revora</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-none">
-            Find the <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal to-brand-emerald">Ultimate Luxury</span><br />
+            Find the <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-red to-brand-emerald">Ultimate Luxury</span><br />
             Car For Your Journey
           </h1>
 
@@ -95,14 +95,14 @@ const HomePage = () => {
           <div className="flex items-center justify-center space-x-4">
             <a
               href="#catalog"
-              className="btn-teal text-sm flex items-center space-x-1.5"
+              className="btn-red text-sm flex items-center space-x-1.5"
             >
               <span>Explore Fleet</span>
               <ArrowRight size={16} />
             </a>
             <a
               href="#about"
-              className="btn-gold text-sm"
+              className="btn-silver text-sm"
             >
               Learn More
             </a>
@@ -116,14 +116,14 @@ const HomePage = () => {
           ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center space-y-2 mb-12">
-          <span className="text-brand-teal text-xs font-bold uppercase tracking-widest">Our Operations</span>
+          <span className="text-brand-red text-xs font-bold uppercase tracking-widest">Our Operations</span>
           <h2 className="text-3xl font-extrabold text-white">Engineered For Service Excellence</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Card A: Car Sales */}
           <div className="glass-card-interactive p-8 rounded-2xl flex flex-col items-center text-center space-y-4">
-            <div className="w-14 h-14 rounded-full bg-brand-teal bg-opacity-10 border border-brand-teal border-opacity-20 flex items-center justify-center text-brand-teal">
+            <div className="w-14 h-14 rounded-full bg-brand-red bg-opacity-10 border border-brand-red border-opacity-20 flex items-center justify-center text-brand-red">
               <Award size={26} />
             </div>
             <h3 className="text-lg font-bold text-white">Car Sales</h3>
@@ -134,7 +134,7 @@ const HomePage = () => {
 
           {/* Card B: Car Rental */}
           <div className="glass-card-interactive p-8 rounded-2xl flex flex-col items-center text-center space-y-4">
-            <div className="w-14 h-14 rounded-full bg-brand-teal bg-opacity-10 border border-brand-teal border-opacity-20 flex items-center justify-center text-brand-teal">
+            <div className="w-14 h-14 rounded-full bg-brand-red bg-opacity-10 border border-brand-red border-opacity-20 flex items-center justify-center text-brand-red">
               <ShieldCheck size={26} />
             </div>
             <h3 className="text-lg font-bold text-white">Car Rental</h3>
@@ -145,7 +145,7 @@ const HomePage = () => {
 
           {/* Card C: Car Trading */}
           <div className="glass-card-interactive p-8 rounded-2xl flex flex-col items-center text-center space-y-4">
-            <div className="w-14 h-14 rounded-full bg-brand-teal bg-opacity-10 border border-brand-teal border-opacity-20 flex items-center justify-center text-brand-teal">
+            <div className="w-14 h-14 rounded-full bg-brand-red bg-opacity-10 border border-brand-red border-opacity-20 flex items-center justify-center text-brand-red">
               <TrendingUp size={26} />
             </div>
             <h3 className="text-lg font-bold text-white">Car Trading</h3>
@@ -165,7 +165,7 @@ const HomePage = () => {
         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-brand-charcoal border border-white border-opacity-5 shadow-2xl">
           <img
             src="https://picsum.photos/id/111/800/600"
-            alt="Timgad Motors Showcase Room"
+            alt="Revora Showcase Room"
             className="w-full h-full object-cover filter brightness-75 hover:scale-105 transition-transform duration-500"
           />
           {/* Accent decoration */}
@@ -175,27 +175,27 @@ const HomePage = () => {
         {/* Right Side: Copy block */}
         <div className="space-y-6">
           <div className="space-y-2">
-            <span className="text-brand-teal text-xs font-bold uppercase tracking-widest">About Our Fleet</span>
+            <span className="text-brand-red text-xs font-bold uppercase tracking-widest">About Our Fleet</span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Redefining Premium Driving Experiences</h2>
           </div>
 
           <p className="text-brand-steel text-sm leading-relaxed text-opacity-80">
-            Founded with a vision to deliver outstanding vehicle options, Timgad Motors (YourCar) represents a standard-setting inventory boutique. We carefully acquire only premium-class selections, ensuring every model on our floor is fully verified and freshly prepared.
+            Founded with a vision to deliver outstanding vehicle options, Revora (Revora) represents a standard-setting inventory boutique. We carefully acquire only premium-class selections, ensuring every model on our floor is fully verified and freshly prepared.
           </p>
 
           <div className="space-y-3">
             <div className="flex items-center space-x-3 text-sm">
-              <span className="w-5 h-5 rounded-full bg-brand-teal bg-opacity-10 text-brand-teal flex items-center justify-center text-xs font-bold font-mono">1</span>
+              <span className="w-5 h-5 rounded-full bg-brand-red bg-opacity-10 text-brand-red flex items-center justify-center text-xs font-bold font-mono">1</span>
               <span className="text-white font-medium">100-Point Multipoint Certification on every car</span>
             </div>
             
             <div className="flex items-center space-x-3 text-sm">
-              <span className="w-5 h-5 rounded-full bg-brand-teal bg-opacity-10 text-brand-teal flex items-center justify-center text-xs font-bold font-mono">2</span>
+              <span className="w-5 h-5 rounded-full bg-brand-red bg-opacity-10 text-brand-red flex items-center justify-center text-xs font-bold font-mono">2</span>
               <span className="text-white font-medium">Completely secure backend transactions with tracking</span>
             </div>
 
             <div className="flex items-center space-x-3 text-sm">
-              <span className="w-5 h-5 rounded-full bg-brand-teal bg-opacity-10 text-brand-teal flex items-center justify-center text-xs font-bold font-mono">3</span>
+              <span className="w-5 h-5 rounded-full bg-brand-red bg-opacity-10 text-brand-red flex items-center justify-center text-xs font-bold font-mono">3</span>
               <span className="text-white font-medium">Dedicated expert maintenance support desk</span>
             </div>
           </div>
@@ -209,7 +209,7 @@ const HomePage = () => {
       <section id="catalog" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="flex flex-col md:flex-row md:justify-between md:items-end space-y-4 md:space-y-0 border-b border-brand-charcoal pb-6">
           <div className="space-y-2">
-            <span className="text-[#D4AF37] text-xs font-bold uppercase tracking-widest">Our Available Fleet</span>
+            <span className="text-brand-silver text-xs font-bold uppercase tracking-widest">Our Available Fleet</span>
             <h2 className="text-3xl font-extrabold text-white">Browse Premium Collections</h2>
           </div>
 
@@ -221,8 +221,8 @@ const HomePage = () => {
                 onClick={() => handleCategoryChange(category)}
                 className={`text-xs font-semibold py-2 px-4 rounded-md transition-all duration-300 ${
                   activeCategory === category
-                    ? 'bg-brand-teal text-black shadow-md'
-                    : 'bg-brand-charcoal bg-opacity-40 text-brand-steel hover:text-white border border-white border-opacity-5 hover:border-brand-teal hover:border-opacity-20'
+                    ? 'bg-brand-red text-black shadow-md'
+                    : 'bg-brand-charcoal bg-opacity-40 text-brand-steel hover:text-white border border-white border-opacity-5 hover:border-brand-red hover:border-opacity-20'
                 }`}
               >
                 {category}

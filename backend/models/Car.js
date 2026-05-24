@@ -29,12 +29,25 @@ const carSchema = new mongoose.Schema(
       required: [true, 'Car price is required'],
       min: [0, 'Price cannot be negative']
     },
+    // The market value to show competitive pricing
+    marketPrice: {
+      type: Number,
+      min: [0, 'Market price cannot be negative']
+    },
+    // Market trend indicator
+    marketTrend: {
+      type: String,
+      enum: {
+        values: ['up', 'down', 'stable'],
+        message: '{VALUE} is not a valid trend'
+      },
+      default: 'stable'
+    },
     // The direct link/URL of the vehicle photo - must be text, required
     imageUrl: {
       type: String,
       required: [true, 'Car image URL is required'],
       trim: true,
-      // Regular expression to check if the text matches a standard URL format
       match: [/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/, 'Please provide a valid image URL']
     },
     // Brief marketing details - must be text, max 500 characters
@@ -58,7 +71,7 @@ const carSchema = new mongoose.Schema(
       min: [0, 'Luggage cannot be negative'],
       default: 0
     },
-    // The specific rental class or pricing segment - restricts values to a pre-defined set (enum)
+    // The specific rental class or pricing segment
     category: {
       type: String,
       required: [true, 'Car category is required'],
@@ -73,14 +86,42 @@ const carSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
       index: true
+    },
+    // Year of manufacture
+    year: {
+      type: Number,
+      required: [true, 'Car year is required'],
+      min: [1900, 'Year must be valid'],
+      index: true
+    },
+    // Car location (City/State)
+    location: {
+      type: String,
+      required: [true, 'Car location is required'],
+      trim: true,
+      index: true
+    },
+    // Model of the car (in addition to brand)
+    model: {
+      type: String,
+      trim: true,
+      index: true
+    },
+    // Dealer offering the car
+    dealerId: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      index: true
     }
   },
   {
-    // Automatically creates 'createdAt' and 'updatedAt' date columns inside our document
     timestamps: true
   }
 );
 
+// Create compound indexes for search optimization
+carSchema.index({ brand: 1, model: 1 });
+carSchema.index({ category: 1, price: 1 });
+
 // Compile the schema into a Mongoose Model named 'Car' and export it.
-// This allows other files to query, insert, update, or delete cars.
 module.exports = mongoose.model('Car', carSchema);

@@ -1,5 +1,5 @@
 /**
- * MAIN SERVER INITIALIZATION FILE (Timgad Motors API Backend)
+ * MAIN SERVER INITIALIZATION FILE (Revora API Backend)
  * This is the central entrypoint of our backend application.
  * It boots up Express, establishes MongoDB connections, applies robust
  * middleware security layers (Helmet, CORS, rate limits, XSS/NoSQL mitigations),
@@ -17,6 +17,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const dotenv = require('dotenv');
 
 // 2. Custom Route and Middleware Imports
+const authRoutes = require('./routes/authRoutes');
 const carRoutes = require('./routes/carRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const adminRoutes = require('./routes/adminRoutes');
@@ -41,8 +42,8 @@ const connectDatabase = async () => {
     }
     
     console.log('Attempting to connect to MongoDB...');
-    // Connect to MongoDB database
-    await mongoose.connect(mongoUri);
+    // Connect to MongoDB database with connection pooling for performance
+    await mongoose.connect(mongoUri, { maxPoolSize: 50 });
     console.log('MongoDB connection established successfully!');
   } catch (error) {
     console.error('MongoDB connection error:', error.message);
@@ -111,8 +112,9 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// B. Mount Car, Order, and Admin routes
+// B. Mount Auth, Car, Order, and Admin routes
 // This prefixes all internal routing mappings (e.g. GET /cars becomes GET /api/cars)
+app.use('/api/auth', authRoutes);
 app.use('/api', carRoutes);
 app.use('/api', orderRoutes);
 app.use('/api', adminRoutes);
@@ -124,7 +126,7 @@ app.use(errorHandler);
 // 8. SERVER LAUNCH
 app.listen(PORT, () => {
   console.log(`=========================================`);
-  console.log(` Timgad Motors Express API is booting...`);
+  console.log(` Revora Express API is booting...`);
   console.log(` Running in [${process.env.NODE_ENV || 'development'}] mode`);
   console.log(` Listening on: http://localhost:${PORT}`);
   console.log(`=========================================`);

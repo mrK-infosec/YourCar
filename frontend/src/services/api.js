@@ -27,7 +27,7 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     // 1. Retrieve the JWT admin token from localStorage
-    const token = localStorage.getItem('timgad_admin_token');
+    const token = localStorage.getItem('revora_admin_token');
     
     // 2. If the token exists, attach it to the headers
     if (token) {
@@ -61,8 +61,8 @@ api.interceptors.response.use(
     // If the backend returns 401 Unauthorized, it means the token expired or is invalid
     if (error.response?.status === 401) {
       // Clear out the stale token from memory so they can log in again
-      localStorage.removeItem('timgad_admin_token');
-      localStorage.removeItem('timgad_admin_email');
+      localStorage.removeItem('revora_admin_token');
+      localStorage.removeItem('revora_admin_email');
     }
     
     // Pass along the error message so our components can catch it in try-catch blocks

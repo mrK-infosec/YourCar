@@ -29,7 +29,7 @@ const AdminPage = lazy(() => import('./pages/AdminPage'));
 // A loading fallback component for Suspense
 const PageLoader = () => (
   <div className="flex items-center justify-center min-h-[60vh]">
-    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brand-teal"></div>
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brand-red"></div>
   </div>
 );
 
@@ -43,7 +43,7 @@ const App = () => {
 
   return (
     // Central container with our dark branding background color
-    <div className="min-h-screen bg-[#0B0C10] flex flex-col justify-between text-[#C5C6C7]">
+    <div className="min-h-screen bg-brand-dark flex flex-col justify-between text-brand-steel">
       
       {/* 1. TOAST NOTIFICATION CONTAINER */}
       {/* Renders global notifications with customized dark glass templates */}
@@ -91,15 +91,15 @@ const App = () => {
           {/* Column A: Logo & Brand Description */}
           <div className="space-y-4 md:col-span-1">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-teal to-brand-emerald flex items-center justify-center text-black">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-red to-brand-emerald flex items-center justify-center text-black">
                 <Car size={16} className="stroke-[2.5]" />
               </div>
               <span className="font-extrabold text-lg tracking-tight text-white font-sans">
-                TIMGAD<span className="text-brand-teal font-normal ml-0.5">MOTORS</span>
+                REV<span className="text-brand-red font-normal ml-0.5">ORA</span>
               </span>
             </Link>
             <p className="text-[11px] text-gray-500 leading-relaxed">
-              Timgad Motors represents an elite corporate inventory catalog dedicated to sourcing certified sports, executive, and SUV listings.
+              Revora represents an elite corporate inventory catalog dedicated to sourcing certified sports, executive, and SUV listings.
             </p>
           </div>
 
@@ -107,9 +107,9 @@ const App = () => {
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-widest">Sitemap Fleet</h4>
             <div className="flex flex-col space-y-2 text-xs">
-              <Link to="/" className="text-gray-500 hover:text-brand-teal transition-colors">Browse Fleet Collections</Link>
-              <Link to="/track" className="text-gray-500 hover:text-brand-teal transition-colors">Track Active Bookings</Link>
-              <Link to="/admin" className="text-gray-500 hover:text-brand-teal transition-colors">Authorized Portals</Link>
+              <Link to="/" className="text-gray-500 hover:text-brand-red transition-colors">Browse Fleet Collections</Link>
+              <Link to="/track" className="text-gray-500 hover:text-brand-red transition-colors">Track Active Bookings</Link>
+              <Link to="/admin" className="text-gray-500 hover:text-brand-red transition-colors">Authorized Portals</Link>
             </div>
           </div>
 
@@ -128,16 +128,16 @@ const App = () => {
             <h4 className="text-xs font-bold text-white uppercase tracking-widest">Support Desk</h4>
             <div className="flex flex-col space-y-2 text-xs text-gray-500">
               <div className="flex items-center space-x-2">
-                <Phone size={13} className="text-brand-teal" />
-                <span>+1 555-TIMGAD</span>
+                <Phone size={13} className="text-brand-red" />
+                <span>+1 555-REVORA</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Mail size={13} className="text-brand-teal" />
-                <span>support@timgad.com</span>
+                <Mail size={13} className="text-brand-red" />
+                <span>support@revora.com</span>
               </div>
               <div className="flex items-center space-x-2">
-                <MapPin size={13} className="text-brand-teal" />
-                <span>100 Luxury Blvd, Timgad City</span>
+                <MapPin size={13} className="text-brand-red" />
+                <span>100 Luxury Blvd, Revora City</span>
               </div>
             </div>
           </div>
@@ -146,10 +146,10 @@ const App = () => {
 
         {/* Legal copyrights */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-brand-charcoal border-opacity-40 pt-8 flex flex-col sm:flex-row justify-between items-center text-[10px] text-gray-600">
-          <span>&copy; {new Date().getFullYear()} Timgad Motors. All rights reserved globally.</span>
+          <span>&copy; {new Date().getFullYear()} Revora. All rights reserved globally.</span>
           <div className="flex space-x-4 mt-4 sm:mt-0">
-            <a href="#" className="hover:text-brand-teal">Privacy Policy</a>
-            <a href="#" className="hover:text-brand-teal">Terms of Reservation</a>
+            <a href="#" className="hover:text-brand-red">Privacy Policy</a>
+            <a href="#" className="hover:text-brand-red">Terms of Reservation</a>
           </div>
         </div>
       </footer>

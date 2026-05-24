@@ -1,7 +1,7 @@
 /**
  * ADMIN CONTROLLER
  * This file handles administrator authentication.
- * Since we only have a single administrator account (admin@timgad.com),
+ * Since we only have a single administrator account (admin@revora.com),
  * we verify credentials directly and securely using bcryptjs and
  * issue a signed JSON Web Token (JWT) to authenticate future sessions.
  */
@@ -11,7 +11,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 // Admin credentials are now securely loaded from environment variables
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@timgad.com';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@revora.com';
 const HASHED_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD_HASH;
 
 /**

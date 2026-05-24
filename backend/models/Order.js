@@ -76,6 +76,21 @@ const orderSchema = new mongoose.Schema(
       required: true,
       min: [0, 'Total amount cannot be negative']
     },
+    // Payment method selected at checkout
+    paymentMethod: {
+      type: String,
+      required: true,
+      enum: {
+        values: ['card', 'tabby', 'tamara', 'bank_cheque', 'cash'],
+        message: '{VALUE} is not a valid payment method'
+      },
+      default: 'card'
+    },
+    // Installment details if tabby or tamara is used
+    installments: {
+      months: { type: Number },
+      monthlyAmount: { type: Number }
+    },
     // Current fulfillment phase of the order
     status: {
       type: String,

@@ -49,13 +49,13 @@ const CartModal = ({ isOpen, onClose }) => {
               // Back button to return to cart listing
               <button 
                 onClick={() => setShowCheckout(false)}
-                className="p-1 rounded-full text-brand-steel hover:text-brand-teal transition-colors"
+                className="p-1 rounded-full text-brand-steel hover:text-brand-red transition-colors"
                 title="Back to shopping cart"
               >
                 <ArrowLeft size={20} />
               </button>
             ) : (
-              <ShoppingBag size={20} className="text-brand-teal" />
+              <ShoppingBag size={20} className="text-brand-red" />
             )}
             <h2 className="text-lg font-bold tracking-tight">
               {showCheckout ? 'Confirm Purchase' : `Your Cart (${getCartCount()})`}
@@ -99,7 +99,7 @@ const CartModal = ({ isOpen, onClose }) => {
               </div>
               <button
                 onClick={onClose}
-                className="btn-teal py-2 text-xs"
+                className="btn-red py-2 text-xs"
               >
                 Start Shopping
               </button>
@@ -110,7 +110,7 @@ const CartModal = ({ isOpen, onClose }) => {
               {cartItems.map((item) => (
                 <div
                   key={item.car}
-                  className="flex items-center space-x-4 p-3 rounded-xl bg-black bg-opacity-20 border border-brand-charcoal border-opacity-40 transition-colors duration-300 hover:border-brand-teal hover:border-opacity-10 group"
+                  className="flex items-center space-x-4 p-3 rounded-xl bg-black bg-opacity-20 border border-brand-charcoal border-opacity-40 transition-colors duration-300 hover:border-brand-red hover:border-opacity-10 group"
                 >
                   {/* Item Image */}
                   <img
@@ -124,7 +124,7 @@ const CartModal = ({ isOpen, onClose }) => {
                     <span className="text-[10px] font-bold text-brand-steel uppercase tracking-wider">{item.brand}</span>
                     <h4 className="font-bold text-white text-sm truncate mt-0.5">{item.name}</h4>
                     <div className="flex items-baseline space-x-1.5 mt-1">
-                      <span className="text-brand-teal text-xs font-bold">{formatPrice(item.price)}</span>
+                      <span className="text-brand-red text-xs font-bold">{formatPrice(item.price)}</span>
                       <span className="text-gray-500 text-[10px]">x {item.quantity}</span>
                     </div>
                   </div>
@@ -144,7 +144,7 @@ const CartModal = ({ isOpen, onClose }) => {
                     <div className="flex items-center bg-black bg-opacity-30 border border-brand-charcoal rounded-md py-0.5 px-1 space-x-2 text-xs">
                       <button
                         onClick={() => updateQuantity(item.car, item.quantity - 1)}
-                        className="text-brand-steel hover:text-brand-teal p-0.5"
+                        className="text-brand-steel hover:text-brand-red p-0.5"
                         disabled={item.quantity <= 1}
                       >
                         <Minus size={11} />
@@ -152,7 +152,7 @@ const CartModal = ({ isOpen, onClose }) => {
                       <span className="font-bold w-4 text-center">{item.quantity}</span>
                       <button
                         onClick={() => updateQuantity(item.car, item.quantity + 1)}
-                        className="text-brand-steel hover:text-brand-teal p-0.5"
+                        className="text-brand-steel hover:text-brand-red p-0.5"
                       >
                         <Plus size={11} />
                       </button>
@@ -170,7 +170,7 @@ const CartModal = ({ isOpen, onClose }) => {
             {/* Price Summations */}
             <div className="flex justify-between items-baseline pt-1">
               <span className="text-brand-steel text-sm">Grand Subtotal:</span>
-              <span className="text-[#D4AF37] text-2xl font-black font-sans">
+              <span className="text-brand-silver text-2xl font-black font-sans">
                 {formatPrice(getCartTotal())}
               </span>
             </div>
@@ -179,14 +179,14 @@ const CartModal = ({ isOpen, onClose }) => {
             <div className="space-y-2">
               <button
                 onClick={() => setShowCheckout(true)}
-                className="w-full btn-teal py-3 text-sm flex items-center justify-center space-x-2"
+                className="w-full btn-red py-3 text-sm flex items-center justify-center space-x-2"
               >
                 <span>Proceed to Checkout</span>
               </button>
               
               <button
                 onClick={onClose}
-                className="w-full text-center text-xs text-brand-steel hover:text-brand-teal py-2 transition-colors duration-300"
+                className="w-full text-center text-xs text-brand-steel hover:text-brand-red py-2 transition-colors duration-300"
               >
                 Continue Browsing
               </button>

@@ -1,6 +1,6 @@
 /**
  * ADMIN PAGE COMPONENT
- * The administrative command dashboard of Timgad Motors (YourCar).
+ * The administrative command dashboard of Revora (Revora).
  * Features:
  * 1. Secure authorization gate (asks for login if token is missing).
  * 2. Key Performance Indicators (KPIs) cards detailing Revenue, Active Bookings, and fleet catalogs.
@@ -17,7 +17,7 @@ import { Lock, LogOut, DollarSign, ShoppingBag, Car, Plus, Edit, Trash2, Check, 
 
 const AdminPage = () => {
   // Authentication states
-  const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('timgad_admin_token'));
+  const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('revora_admin_token'));
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [authLoading, setAuthLoading] = useState(false);
@@ -89,8 +89,8 @@ const AdminPage = () => {
 
       if (response.data.success) {
         // Save JWT session credentials in local storage
-        localStorage.setItem('timgad_admin_token', response.data.token);
-        localStorage.setItem('timgad_admin_email', response.data.admin.email);
+        localStorage.setItem('revora_admin_token', response.data.token);
+        localStorage.setItem('revora_admin_email', response.data.admin.email);
         
         setIsAuthenticated(true);
         toast.success('Welcome back, Admin!');
@@ -107,8 +107,8 @@ const AdminPage = () => {
 
   // Admin logout handler
   const handleLogout = () => {
-    localStorage.removeItem('timgad_admin_token');
-    localStorage.removeItem('timgad_admin_email');
+    localStorage.removeItem('revora_admin_token');
+    localStorage.removeItem('revora_admin_email');
     setIsAuthenticated(false);
     setLoginPassword('');
     toast.success('Logged out successfully.');
@@ -260,13 +260,13 @@ const AdminPage = () => {
       <div className="min-h-[90vh] flex items-center justify-center pt-20 px-4">
         <div className="w-full max-w-md glass-card p-8 rounded-2xl border border-brand-charcoal text-center space-y-6 animate-slide-up">
           {/* Glowing lock logo */}
-          <div className="w-16 h-16 rounded-full bg-brand-teal bg-opacity-10 border border-brand-teal border-opacity-20 flex items-center justify-center mx-auto text-brand-teal shadow-[0_0_20px_rgba(102,252,241,0.15)]">
+          <div className="w-16 h-16 rounded-full bg-brand-red bg-opacity-10 border border-brand-red border-opacity-20 flex items-center justify-center mx-auto text-brand-red shadow-[0_0_20px_rgba(102,252,241,0.15)]">
             <Lock size={26} className="stroke-[2.5]" />
           </div>
 
           <div className="space-y-1">
             <h2 className="text-2xl font-extrabold text-white tracking-tight">Admin Gate</h2>
-            <p className="text-brand-steel text-xs">Access is restricted to authorized Timgad Motors officials.</p>
+            <p className="text-brand-steel text-xs">Access is restricted to authorized Revora officials.</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4 text-left">
@@ -276,7 +276,7 @@ const AdminPage = () => {
                 type="email"
                 value={loginEmail}
                 onChange={(e) => setLoginEmail(e.target.value)}
-                placeholder="e.g. admin@timgad.com"
+                placeholder="e.g. admin@revora.com"
                 className="form-input text-sm"
                 required
                 disabled={authLoading}
@@ -299,7 +299,7 @@ const AdminPage = () => {
             <button
               type="submit"
               disabled={authLoading}
-              className="w-full btn-teal text-sm font-semibold py-3 flex items-center justify-center pt-3.5"
+              className="w-full btn-red text-sm font-semibold py-3 flex items-center justify-center pt-3.5"
             >
               {authLoading ? (
                 <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></span>
@@ -310,7 +310,7 @@ const AdminPage = () => {
           </form>
 
           <div className="text-[10px] text-gray-500 flex items-center justify-center space-x-1.5 p-2 bg-brand-charcoal bg-opacity-40 rounded-lg">
-            <ShieldAlert size={12} className="text-[#D4AF37]" />
+            <ShieldAlert size={12} className="text-brand-silver" />
             <span>Authorized access logs are actively recorded for auditing.</span>
           </div>
 
@@ -333,13 +333,13 @@ const AdminPage = () => {
       <div className="flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0 border-b border-brand-charcoal pb-6">
         <div>
           <h1 className="text-3xl font-extrabold text-white tracking-tight">Admin Dashboard</h1>
-          <span className="text-brand-steel text-xs text-opacity-80">Log session: admin@timgad.com</span>
+          <span className="text-brand-steel text-xs text-opacity-80">Log session: admin@revora.com</span>
         </div>
 
         {/* Logout button */}
         <button
           onClick={handleLogout}
-          className="btn-gold py-2 px-4 text-xs font-semibold flex items-center justify-center space-x-1.5 bg-transparent border-red-500 text-red-400 hover:bg-red-500 hover:text-white transition-colors duration-300"
+          className="btn-silver py-2 px-4 text-xs font-semibold flex items-center justify-center space-x-1.5 bg-transparent border-red-500 text-red-400 hover:bg-red-500 hover:text-white transition-colors duration-300"
         >
           <LogOut size={14} />
           <span>Terminate Session</span>
@@ -352,9 +352,9 @@ const AdminPage = () => {
         <div className="glass-card p-6 rounded-2xl border border-brand-charcoal flex items-center justify-between">
           <div className="space-y-1">
             <span className="text-[10px] text-gray-500 uppercase tracking-widest block">Total Revenue</span>
-            <span className="text-2xl font-black text-[#D4AF37]">{formatPrice(calculateTotalRevenue())}</span>
+            <span className="text-2xl font-black text-brand-silver">{formatPrice(calculateTotalRevenue())}</span>
           </div>
-          <div className="w-12 h-12 rounded-lg bg-[#D4AF37] bg-opacity-10 text-[#D4AF37] flex items-center justify-center border border-[#D4AF37] border-opacity-15">
+          <div className="w-12 h-12 rounded-lg bg-[#D4AF37] bg-opacity-10 text-brand-silver flex items-center justify-center border border-[#D4AF37] border-opacity-15">
             <DollarSign size={20} />
           </div>
         </div>
@@ -363,9 +363,9 @@ const AdminPage = () => {
         <div className="glass-card p-6 rounded-2xl border border-brand-charcoal flex items-center justify-between">
           <div className="space-y-1">
             <span className="text-[10px] text-gray-500 uppercase tracking-widest block">Cars Ordered</span>
-            <span className="text-2xl font-black text-brand-teal">{calculateSalesVolume()}</span>
+            <span className="text-2xl font-black text-brand-red">{calculateSalesVolume()}</span>
           </div>
-          <div className="w-12 h-12 rounded-lg bg-brand-teal bg-opacity-10 text-brand-teal flex items-center justify-center border border-brand-teal border-opacity-15">
+          <div className="w-12 h-12 rounded-lg bg-brand-red bg-opacity-10 text-brand-red flex items-center justify-center border border-brand-red border-opacity-15">
             <ShoppingBag size={20} />
           </div>
         </div>
@@ -387,7 +387,7 @@ const AdminPage = () => {
         <button
           onClick={() => setActiveTab('orders')}
           className={`text-xs font-semibold py-2 px-4 rounded-md transition-all duration-300 ${
-            activeTab === 'orders' ? 'bg-brand-teal text-black shadow-md' : 'text-brand-steel hover:text-white'
+            activeTab === 'orders' ? 'bg-brand-red text-black shadow-md' : 'text-brand-steel hover:text-white'
           }`}
         >
           Orders Log ({orders.length})
@@ -396,7 +396,7 @@ const AdminPage = () => {
         <button
           onClick={() => setActiveTab('inventory')}
           className={`text-xs font-semibold py-2 px-4 rounded-md transition-all duration-300 ${
-            activeTab === 'inventory' ? 'bg-brand-teal text-black shadow-md' : 'text-brand-steel hover:text-white'
+            activeTab === 'inventory' ? 'bg-brand-red text-black shadow-md' : 'text-brand-steel hover:text-white'
           }`}
         >
           Catalog Fleet ({cars.length})
@@ -429,7 +429,7 @@ const AdminPage = () => {
                 <tbody className="divide-y divide-brand-charcoal divide-opacity-35">
                   {orders.map((o) => (
                     <tr key={o._id} className="hover:bg-brand-charcoal hover:bg-opacity-20 transition-colors">
-                      <td className="p-4 font-mono font-bold text-brand-teal select-all">{o.orderNumber}</td>
+                      <td className="p-4 font-mono font-bold text-brand-red select-all">{o.orderNumber}</td>
                       <td className="p-4 space-y-1">
                         <span className="font-bold text-white text-sm block">{o.customer.fullName}</span>
                         <span className="text-[10px] text-brand-steel block">{o.customer.phone}</span>
@@ -448,7 +448,7 @@ const AdminPage = () => {
                           <select
                             value={o.status}
                             onChange={(e) => handleStatusChange(o._id, e.target.value)}
-                            className="bg-black border border-brand-charcoal text-white rounded-md py-1.5 px-3 text-xs outline-none focus:border-brand-teal"
+                            className="bg-black border border-brand-charcoal text-white rounded-md py-1.5 px-3 text-xs outline-none focus:border-brand-red"
                           >
                             <option value="pending">Pending</option>
                             <option value="confirmed">Confirmed</option>
@@ -473,7 +473,7 @@ const AdminPage = () => {
           <div className="flex justify-end">
             <button
               onClick={openAddCarModal}
-              className="btn-teal py-2 text-xs flex items-center justify-center space-x-1 font-semibold"
+              className="btn-red py-2 text-xs flex items-center justify-center space-x-1 font-semibold"
             >
               <Plus size={14} className="stroke-[3]" />
               <span>Add Fleet Car</span>
@@ -514,7 +514,7 @@ const AdminPage = () => {
                           <span className="text-[10px] text-gray-500 uppercase tracking-widest block">{car.brand}</span>
                           <span className="font-bold text-white text-sm block mt-0.5">{car.name}</span>
                         </td>
-                        <td className="p-4 uppercase text-brand-teal text-[10px] font-bold tracking-wider">{car.category}</td>
+                        <td className="p-4 uppercase text-brand-red text-[10px] font-bold tracking-wider">{car.category}</td>
                         <td className="p-4 space-y-0.5 text-[10px] text-brand-steel">
                           <div>Seats: {car.seats}</div>
                           <div>Luggage: {car.luggage}</div>
@@ -534,7 +534,7 @@ const AdminPage = () => {
                             {/* Edit Button */}
                             <button
                               onClick={() => openEditCarModal(car)}
-                              className="p-1.5 rounded bg-brand-charcoal text-brand-steel hover:text-brand-teal border border-white border-opacity-5 transition-colors"
+                              className="p-1.5 rounded bg-brand-charcoal text-brand-steel hover:text-brand-red border border-white border-opacity-5 transition-colors"
                               title="Edit listing details"
                             >
                               <Edit size={14} />
@@ -597,7 +597,7 @@ const AdminPage = () => {
                 
                 {/* Name */}
                 <div className="flex flex-col space-y-1">
-                  <label className="text-[10px] font-bold text-[#C5C6C7] uppercase tracking-wider">Car Model Name</label>
+                  <label className="text-[10px] font-bold text-brand-steel uppercase tracking-wider">Car Model Name</label>
                   <input
                     type="text"
                     name="name"
@@ -613,7 +613,7 @@ const AdminPage = () => {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {/* Price */}
                 <div className="flex flex-col space-y-1">
-                  <label className="text-[10px] font-bold text-[#C5C6C7] uppercase tracking-wider">Purchase Price ($)</label>
+                  <label className="text-[10px] font-bold text-brand-steel uppercase tracking-wider">Purchase Price ($)</label>
                   <input
                     type="number"
                     name="price"
@@ -628,7 +628,7 @@ const AdminPage = () => {
 
                 {/* Seats */}
                 <div className="flex flex-col space-y-1">
-                  <label className="text-[10px] font-bold text-[#C5C6C7] uppercase tracking-wider">Seats Capacity (1-9)</label>
+                  <label className="text-[10px] font-bold text-brand-steel uppercase tracking-wider">Seats Capacity (1-9)</label>
                   <input
                     type="number"
                     name="seats"
@@ -644,7 +644,7 @@ const AdminPage = () => {
 
                 {/* Luggage */}
                 <div className="flex flex-col space-y-1">
-                  <label className="text-[10px] font-bold text-[#C5C6C7] uppercase tracking-wider">Luggage Limit</label>
+                  <label className="text-[10px] font-bold text-brand-steel uppercase tracking-wider">Luggage Limit</label>
                   <input
                     type="number"
                     name="luggage"
@@ -661,12 +661,12 @@ const AdminPage = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Category select */}
                 <div className="flex flex-col space-y-1">
-                  <label className="text-[10px] font-bold text-[#C5C6C7] uppercase tracking-wider">Class Segment</label>
+                  <label className="text-[10px] font-bold text-brand-steel uppercase tracking-wider">Class Segment</label>
                   <select
                     name="category"
                     value={carFormData.category}
                     onChange={handleFormInputChange}
-                    className="bg-black border border-brand-charcoal text-white rounded-md py-2 px-3 text-xs outline-none focus:border-brand-teal"
+                    className="bg-black border border-brand-charcoal text-white rounded-md py-2 px-3 text-xs outline-none focus:border-brand-red"
                   >
                     <option value="First Class">First Class</option>
                     <option value="Business Class">Business Class</option>
@@ -683,7 +683,7 @@ const AdminPage = () => {
                     name="inStock"
                     checked={carFormData.inStock}
                     onChange={handleFormInputChange}
-                    className="w-4 h-4 bg-black border border-brand-charcoal text-brand-teal focus:ring-brand-teal rounded"
+                    className="w-4 h-4 bg-black border border-brand-charcoal text-brand-red focus:ring-brand-red rounded"
                   />
                   <label htmlFor="inStock" className="text-xs font-bold text-brand-steel uppercase tracking-wider cursor-pointer">
                     Available in Stock
@@ -707,7 +707,7 @@ const AdminPage = () => {
 
               {/* Description */}
               <div className="flex flex-col space-y-1">
-                <label className="text-[10px] font-bold text-[#C5C6C7] uppercase tracking-wider">Overview Descriptions (max 500 chars)</label>
+                <label className="text-[10px] font-bold text-brand-steel uppercase tracking-wider">Overview Descriptions (max 500 chars)</label>
                 <textarea
                   name="description"
                   value={carFormData.description}
@@ -732,7 +732,7 @@ const AdminPage = () => {
                 
                 <button
                   type="submit"
-                  className="btn-teal py-2 px-5 text-xs font-semibold"
+                  className="btn-red py-2 px-5 text-xs font-semibold"
                 >
                   {editingCar ? 'Update Listing' : 'Sead Listing'}
                 </button>

@@ -24,7 +24,8 @@ const CheckoutForm = ({ onSuccess, onCancel }) => {
     fullName: '',
     phone: '',
     email: '',
-    address: ''
+    address: '',
+    paymentMethod: 'card'
   });
 
   // Track simple client-side form validation errors
@@ -98,7 +99,8 @@ const CheckoutForm = ({ onSuccess, onCancel }) => {
         price: item.price,
         quantity: item.quantity
       })),
-      totalAmount: getCartTotal()
+      totalAmount: getCartTotal(),
+      paymentMethod: formData.paymentMethod
     };
 
     setIsSubmitting(true);
@@ -148,7 +150,7 @@ const CheckoutForm = ({ onSuccess, onCancel }) => {
     return (
       <div className="text-center py-6 px-4 space-y-6 animate-fade-in">
         {/* Animated Check Icon */}
-        <div className="w-16 h-16 rounded-full bg-brand-teal bg-opacity-20 border border-brand-teal flex items-center justify-center mx-auto text-brand-teal shadow-[0_0_20px_rgba(102,252,241,0.25)]">
+        <div className="w-16 h-16 rounded-full bg-brand-red bg-opacity-20 border border-brand-red flex items-center justify-center mx-auto text-brand-red shadow-[0_0_20px_rgba(102,252,241,0.25)]">
           <Check size={32} className="stroke-[2.5] animate-bounce" />
         </div>
 
@@ -167,29 +169,29 @@ const CheckoutForm = ({ onSuccess, onCancel }) => {
           <div className="border-t border-brand-charcoal pt-3 flex items-center justify-between">
             <div className="text-left space-y-1">
               <span className="text-[10px] text-gray-500 uppercase tracking-widest block">Order Number</span>
-              <span className="font-mono font-bold text-brand-teal text-sm tracking-wider">{createdOrder.orderNumber}</span>
+              <span className="font-mono font-bold text-brand-red text-sm tracking-wider">{createdOrder.orderNumber}</span>
             </div>
             
             {/* Copy button */}
             <button
               onClick={copyToClipboard}
-              className="p-2 rounded-lg bg-brand-charcoal text-brand-steel hover:text-white border border-white border-opacity-5 hover:border-brand-teal transition-all duration-300"
+              className="p-2 rounded-lg bg-brand-charcoal text-brand-steel hover:text-white border border-white border-opacity-5 hover:border-brand-red transition-all duration-300"
               title="Copy Order Number"
             >
-              {copied ? <Check size={15} className="text-brand-teal" /> : <Clipboard size={15} />}
+              {copied ? <Check size={15} className="text-brand-red" /> : <Clipboard size={15} />}
             </button>
           </div>
         </div>
 
         <div className="text-xs text-brand-steel flex items-center justify-center space-x-1.5 p-2 bg-brand-charcoal bg-opacity-40 rounded-lg">
-          <HelpCircle size={14} className="text-brand-teal" />
+          <HelpCircle size={14} className="text-brand-red" />
           <span>Save this code to check your status under **Track Order**!</span>
         </div>
 
         {/* Complete Order and Close */}
         <button
           onClick={onSuccess}
-          className="w-full btn-teal py-3 text-sm"
+          className="w-full btn-red py-3 text-sm"
         >
           Excellent
         </button>
@@ -263,6 +265,40 @@ const CheckoutForm = ({ onSuccess, onCancel }) => {
         {errors.address && <span className="text-[10px] text-red-400 font-bold">{errors.address}</span>}
       </div>
 
+      {/* PAYMENT METHOD SELECTION */}
+      <div className="flex flex-col space-y-3 pt-4 border-t border-brand-charcoal mt-4">
+        <label className="text-xs font-bold text-brand-steel uppercase tracking-wider">Payment Method *</label>
+        <div className="grid grid-cols-2 gap-2">
+          {/* Card */}
+          <label className={`border ${formData.paymentMethod === 'card' ? 'border-brand-red bg-brand-red/10' : 'border-brand-charcoal bg-black/40'} rounded-lg p-3 cursor-pointer flex items-center space-x-2 transition-colors`}>
+            <input type="radio" name="paymentMethod" value="card" checked={formData.paymentMethod === 'card'} onChange={handleInputChange} className="hidden" />
+            <div className={`w-3 h-3 rounded-full border flex-shrink-0 ${formData.paymentMethod === 'card' ? 'border-brand-red bg-brand-red' : 'border-brand-steel'}`}></div>
+            <span className="text-xs font-bold text-white">Credit Card</span>
+          </label>
+          
+          {/* Tabby */}
+          <label className={`border ${formData.paymentMethod === 'tabby' ? 'border-[#38ffc8] bg-[#38ffc8]/10' : 'border-brand-charcoal bg-black/40'} rounded-lg p-3 cursor-pointer flex items-center space-x-2 transition-colors`}>
+            <input type="radio" name="paymentMethod" value="tabby" checked={formData.paymentMethod === 'tabby'} onChange={handleInputChange} className="hidden" />
+            <div className={`w-3 h-3 rounded-full border flex-shrink-0 ${formData.paymentMethod === 'tabby' ? 'border-[#38ffc8] bg-[#38ffc8]' : 'border-brand-steel'}`}></div>
+            <span className="text-xs font-black text-[#38ffc8]">tabby</span>
+          </label>
+
+          {/* Tamara */}
+          <label className={`border ${formData.paymentMethod === 'tamara' ? 'border-[#F2A900] bg-[#F2A900]/10' : 'border-brand-charcoal bg-black/40'} rounded-lg p-3 cursor-pointer flex items-center space-x-2 transition-colors`}>
+            <input type="radio" name="paymentMethod" value="tamara" checked={formData.paymentMethod === 'tamara'} onChange={handleInputChange} className="hidden" />
+            <div className={`w-3 h-3 rounded-full border flex-shrink-0 ${formData.paymentMethod === 'tamara' ? 'border-[#F2A900] bg-[#F2A900]' : 'border-brand-steel'}`}></div>
+            <span className="text-xs font-black text-[#F2A900]">tamara</span>
+          </label>
+
+          {/* Bank Cheque */}
+          <label className={`border ${formData.paymentMethod === 'bank_cheque' ? 'border-brand-red bg-brand-red/10' : 'border-brand-charcoal bg-black/40'} rounded-lg p-3 cursor-pointer flex items-center space-x-2 transition-colors`}>
+            <input type="radio" name="paymentMethod" value="bank_cheque" checked={formData.paymentMethod === 'bank_cheque'} onChange={handleInputChange} className="hidden" />
+            <div className={`w-3 h-3 rounded-full border flex-shrink-0 ${formData.paymentMethod === 'bank_cheque' ? 'border-brand-red bg-brand-red' : 'border-brand-steel'}`}></div>
+            <span className="text-xs font-bold text-white">Bank Cheque</span>
+          </label>
+        </div>
+      </div>
+
       {/* SUBMISSION BUTTONS */}
       <div className="flex items-center space-x-3 pt-2">
         <button
@@ -277,7 +313,7 @@ const CheckoutForm = ({ onSuccess, onCancel }) => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-2/3 btn-teal py-2.5 text-xs font-semibold flex items-center justify-center"
+          className="w-2/3 btn-red py-2.5 text-xs font-semibold flex items-center justify-center"
         >
           {isSubmitting ? (
             <span className="flex items-center space-x-2">

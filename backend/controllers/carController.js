@@ -15,13 +15,65 @@ const Car = require('../models/Car');
  */
 exports.getCars = async (req, res, next) => {
   try {
-    // Fetch all car documents from MongoDB
-    const cars = await Car.find();
+    let query;
+
+    // Copy req.query
+    const reqQuery = { ...req.query };
+
+    // Fields to exclude from filtering
+    const removeFields = ['select', 'sort', 'page', 'limit'];
+
+    // Loop over removeFields and delete them from reqQuery
+    removeFields.forEach((param) => delete reqQuery[param]);
+
+    // Create query string
+    let queryStr = JSON.stringify(reqQuery);
+
+    // Create operators ($gt, $gte, etc)
+    queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, (match) => `$${match}`);
+
+    // Finding resource
+    query = Car.find(JSON.parse(queryStr));
+
+    // Select Fields
+    if (req.query.select) {
+      const fields = req.query.select.split(',').join(' ');
+      query = query.select(fields);
+    } else {
+      // Default projection: Exclude heavy text fields if not requested
+      query = query.select('-description');
+    }
+
+    // Sort
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(',').join(' ');
+      query = query.sort(sortBy);
+    } else {
+      query = query.sort('-createdAt'); // Default sort
+    }
+
+    // Pagination
+    const page = parseInt(req.query.page, 10) || 1;
+    // Hard cap limit at 50 to prevent memory leak and unbounded queries
+    let limit = parseInt(req.query.limit, 10) || 10;
+    if (limit > 50) {
+      limit = 50; 
+    }
+    const skip = (page - 1) * limit;
+
+    query = query.skip(skip).limit(limit);
+
+    // Executing query
+    const cars = await query;
 
     // Respond with a 200 OK and the list of cars
     res.status(200).json({
       success: true,
       count: cars.length,
+      pagination: {
+        page,
+        limit
+      },
       data: cars
     });
   } catch (error) {
@@ -65,13 +117,15 @@ exports.getCarById = async (req, res, next) => {
 exports.createCar = async (req, res, next) => {
   try {
     // Deconstruct fields from the validated request body
-    const { name, brand, price, imageUrl, description, seats, luggage, category } = req.body;
+    const { name, brand, price, marketPrice, marketTrend, imageUrl, description, seats, luggage, category } = req.body;
 
     // Create a new Car document and save it in MongoDB
     const newCar = await Car.create({
       name,
       brand,
       price,
+      marketPrice,
+      marketTrend,
       imageUrl,
       description,
       seats,

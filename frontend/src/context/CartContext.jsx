@@ -20,7 +20,7 @@ export const CartProvider = ({ children }) => {
   // If a cart was saved previously, load it. If not, start with an empty array.
   const [cartItems, setCartItems] = useState(() => {
     try {
-      const savedCart = localStorage.getItem('timgad_cart_items');
+      const savedCart = localStorage.getItem('revora_cart_items');
       return savedCart ? JSON.parse(savedCart) : [];
     } catch (error) {
       console.error('Error loading cart from localStorage:', error);
@@ -31,7 +31,7 @@ export const CartProvider = ({ children }) => {
   // 3. Keep localStorage synced whenever the cartItems array changes
   useEffect(() => {
     try {
-      localStorage.setItem('timgad_cart_items', JSON.stringify(cartItems));
+      localStorage.setItem('revora_cart_items', JSON.stringify(cartItems));
     } catch (error) {
       console.error('Error saving cart to localStorage:', error);
     }
