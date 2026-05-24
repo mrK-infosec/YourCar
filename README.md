@@ -1,6 +1,6 @@
 # Revora: Premium Luxury Car Marketplace
 
-![Revora Dashboard](./screenshots/yourCar.jpeg)
+![Revora Dashboard](./screenshots/revora_dashboard.png)
 
 *A full-stack, enterprise-grade B2B marketplace platform for high-end vehicle inventory and checkout.*
 
