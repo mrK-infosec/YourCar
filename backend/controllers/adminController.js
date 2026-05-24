@@ -10,10 +10,9 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// A cryptographically hashed version of the password: "Admin123!"
-// Generated using bcrypt with a work factor (salt rounds) of 10.
-// This is exactly how production databases store passwords to keep them secure!
-const HASHED_ADMIN_PASSWORD = '$2a$10$y5R9nN6x9P02.Z94d93g/e8M6vA9uT9v9jXWq2yC7k.GgJ9rX2C1q'; 
+// Admin credentials are now securely loaded from environment variables
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@timgad.com';
+const HASHED_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD_HASH;
 
 /**
  * @desc    Authenticate Administrator & Get JWT Token
@@ -24,10 +23,15 @@ exports.adminLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    // 1. Verify that the email matches our testing admin email
-    if (email !== 'admin@timgad.com') {
+    // 1. Verify that the email matches our admin email from env
+    if (email !== ADMIN_EMAIL) {
       res.status(401); // Unauthorized status code
       throw new Error('Invalid administrative email or password');
+    }
+
+    if (!HASHED_ADMIN_PASSWORD) {
+      res.status(500);
+      throw new Error('Server configuration error: Admin password hash is missing.');
     }
 
     // 2. Securely check if the input password matches our cryptographically hashed password
@@ -42,7 +46,7 @@ exports.adminLogin = async (req, res, next) => {
     // 3. Generate a secure, signed JSON Web Token (JWT)
     // The payload contains the admin's email and role
     const token = jwt.sign(
-      { email: 'admin@timgad.com', role: 'admin' }, // Data inside the token
+      { email: ADMIN_EMAIL, role: 'admin' }, // Data inside the token
       process.env.JWT_SECRET,                      // Secret key to sign the token
       { expiresIn: process.env.JWT_EXPIRES_IN || '24h' } // Token lifespan
     );
@@ -54,7 +58,7 @@ exports.adminLogin = async (req, res, next) => {
       message: 'Administrator authentication successful!',
       token: token,
       admin: {
-        email: 'admin@timgad.com',
+        email: ADMIN_EMAIL,
         role: 'admin'
       }
     });

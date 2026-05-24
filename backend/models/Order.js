@@ -16,7 +16,8 @@ const orderSchema = new mongoose.Schema(
     orderNumber: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
+      index: true
     },
     // Customer Contact Details object
     customer: {
@@ -33,7 +34,8 @@ const orderSchema = new mongoose.Schema(
       email: {
         type: String,
         trim: true,
-        lowercase: true // Automatically converts input email to lowercase characters
+        lowercase: true, // Automatically converts input email to lowercase characters
+        index: true
       },
       address: {
         type: String,

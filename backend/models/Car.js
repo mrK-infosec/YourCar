@@ -65,12 +65,14 @@ const carSchema = new mongoose.Schema(
       enum: {
         values: ['First Class', 'Business Class', 'SUV', 'Economy'],
         message: '{VALUE} is not a valid category'
-      }
+      },
+      index: true
     },
     // Indicates if the car is currently available to buy/rent - defaults to true
     inStock: {
       type: Boolean,
-      default: true
+      default: true,
+      index: true
     }
   },
   {

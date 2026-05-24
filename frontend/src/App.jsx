@@ -13,16 +13,25 @@
  * 5. Appends a corporate premium brand Footer at the bottom.
  */
 
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import CartModal from './components/CartModal';
-import HomePage from './pages/HomePage';
-import CarDetailsPage from './pages/CarDetailsPage';
-import OrderTrackingPage from './pages/OrderTrackingPage';
-import AdminPage from './pages/AdminPage';
 import { Toaster } from 'react-hot-toast';
 import { Car, Compass, Mail, Phone, MapPin } from 'lucide-react';
+
+// Lazy loaded pages to optimize bundle size and speed up initial page load
+const HomePage = lazy(() => import('./pages/HomePage'));
+const CarDetailsPage = lazy(() => import('./pages/CarDetailsPage'));
+const OrderTrackingPage = lazy(() => import('./pages/OrderTrackingPage'));
+const AdminPage = lazy(() => import('./pages/AdminPage'));
+
+// A loading fallback component for Suspense
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-[60vh]">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brand-teal"></div>
+  </div>
+);
 
 const App = () => {
   // Global state to track if the sliding Cart Modal sidebar is open or closed
@@ -65,12 +74,14 @@ const App = () => {
 
       {/* 4. MAIN PAGE CONTENT CONTAINER */}
       <main className="flex-grow">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/cars/:id" element={<CarDetailsPage />} />
-          <Route path="/track" element={<OrderTrackingPage />} />
-          <Route path="/admin" element={<AdminPage />} />
-        </Routes>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/cars/:id" element={<CarDetailsPage />} />
+            <Route path="/track" element={<OrderTrackingPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+          </Routes>
+        </Suspense>
       </main>
 
       {/* 5. LUXURY BRAND FOOTER */}
