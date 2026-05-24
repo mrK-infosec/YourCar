@@ -16,31 +16,58 @@ exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+const zod_validation_pipe_1 = require("./utils/zod-validation.pipe");
+const zod_1 = require("zod");
+const TestValidationSchema = zod_1.z.object({
+    name: zod_1.z.string().min(3, { message: 'Name must be at least 3 characters' }),
+    age: zod_1.z.number().min(18, { message: 'Must be at least 18 years old' }),
+    email: zod_1.z.string().email({ message: 'Must be a valid UAE email format' }),
+});
 let AppController = class AppController {
     connection;
     constructor(connection) {
         this.connection = connection;
+        console.log('Injected Mongoose connection:', connection ? 'defined' : 'undefined');
+        if (connection) {
+            console.log('ReadyState:', connection.readyState);
+        }
     }
-    getStatus() {
-        const isConnected = this.connection.readyState === 1;
+    getStatus(triggerError) {
+        if (triggerError === 'true') {
+            throw new common_1.BadRequestException('Verification exception forced by status debug flag!');
+        }
+        const isConnected = this.connection && this.connection.readyState === 1;
+        const readyState = this.connection ? this.connection.readyState : 0;
+        const dbName = this.connection && this.connection.db ? this.connection.db.databaseName : 'offline';
         return {
-            status: 'OK',
-            timestamp: new Date().toISOString(),
-            database: {
-                connected: isConnected,
-                readyState: this.connection.readyState,
-                name: this.connection.db?.databaseName || 'unknown'
-            }
+            connected: isConnected,
+            readyState: readyState,
+            name: dbName,
+        };
+    }
+    testValidation(body) {
+        return {
+            message: 'Payload verified successfully',
+            payload: body,
         };
     }
 };
 exports.AppController = AppController;
 __decorate([
     (0, common_1.Get)('status'),
+    __param(0, (0, common_1.Query)('trigger-error')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "getStatus", null);
+__decorate([
+    (0, common_1.Post)('test-validation'),
+    (0, common_1.UsePipes)(new zod_validation_pipe_1.ZodValidationPipe(TestValidationSchema)),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "testValidation", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)('api'),
     __param(0, (0, mongoose_1.InjectConnection)()),

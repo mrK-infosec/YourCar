@@ -4,11 +4,15 @@ import {
   ArgumentMetadata,
   BadRequestException,
 } from '@nestjs/common';
-import { ZodSchema } from 'zod';
+import type { ZodSchema, ZodIssue } from 'zod';
 
 @Injectable()
 export class ZodValidationPipe implements PipeTransform {
-  constructor(private schema: ZodSchema) {}
+  private schema: ZodSchema;
+
+  constructor(schema: ZodSchema) {
+    this.schema = schema;
+  }
 
   transform(value: unknown, metadata: ArgumentMetadata) {
     // Only validate request bodies
@@ -19,7 +23,7 @@ export class ZodValidationPipe implements PipeTransform {
     const result = this.schema.safeParse(value);
     
     if (!result.success) {
-      const formattedErrors = result.error.errors.map((err) => ({
+      const formattedErrors = result.error.issues.map((err: ZodIssue) => ({
         field: err.path.join('.'),
         message: err.message,
       }));
